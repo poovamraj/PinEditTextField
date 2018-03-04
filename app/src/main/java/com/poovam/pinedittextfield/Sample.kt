@@ -1,4 +1,4 @@
-package opensource.poovam.com.pinfield
+package com.poovam.pinedittextfield
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

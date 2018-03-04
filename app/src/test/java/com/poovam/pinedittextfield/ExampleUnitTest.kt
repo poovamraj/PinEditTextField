@@ -1,4 +1,4 @@
-package opensource.poovam.com.pinfield
+package com.poovam.pinedittextfield
 
 import org.junit.Test
 

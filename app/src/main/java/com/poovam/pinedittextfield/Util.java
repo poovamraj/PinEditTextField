@@ -1,4 +1,4 @@
-package opensource.poovam.com.pinfield.pin_field;
+package com.poovam.pinedittextfield;
 
 import android.content.res.Resources;
 
