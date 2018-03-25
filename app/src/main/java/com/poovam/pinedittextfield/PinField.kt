@@ -30,12 +30,18 @@ import android.view.inputmethod.InputMethodManager
 class PinField(context: Context) : View(context), View.OnClickListener{
 
     enum class Shape{
-        CIRCLE,LINE
+        CIRCLE,LINE,SQUARE
+    }
+
+    enum class KeyboardType(val inputType: Int){
+        TEXT(InputType.TYPE_CLASS_TEXT),NUMBER(InputType.TYPE_CLASS_NUMBER)
     }
 
     private var fieldBackground: Drawable? = null
 
-    var shape = Shape.CIRCLE
+    private val defaultWidth = Util.dpToPx(60).toInt()
+
+    var shape = Shape.SQUARE
 
     var circleRadiusDp = Util.dpToPx(10)
 
@@ -43,31 +49,24 @@ class PinField(context: Context) : View(context), View.OnClickListener{
 
     var mText: SpannableStringBuilder = SpannableStringBuilder()
 
-    val inputType = InputType.TYPE_CLASS_TEXT
+    val inputType = KeyboardType.NUMBER
 
-    var distanceInBetweenDp = -1
-        set(value) {
-            field = value
-            isCustomDistanceInBetween = true
-        }
+    var distanceInBetweenDp = Util.dpToPx(15).toInt()
 
     var numberOfFields = 4
 
-    var singleFieldWidth = 0
+    private var singleFieldWidth = 0
 
     var lineThicknessDp = Util.dpToPx(5)
 
     var mArcPaint = Paint()
 
-    private var isCustomDistanceInBetween = false
 
     init {
         isFocusableInTouchMode = true
 
 
         setWillNotDraw(false)
-
-        distanceInBetweenDp = Util.dpToPx(10).toInt()
 
         mArcPaint.color = ContextCompat.getColor(context,R.color.colorAccent)
         mArcPaint.isAntiAlias = true
@@ -108,20 +107,57 @@ class PinField(context: Context) : View(context), View.OnClickListener{
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        singleFieldWidth = measuredWidth/numberOfFields
-        if(!isCustomDistanceInBetween){
-            distanceInBetweenDp = singleFieldWidth/(numberOfFields-1)
+        val desiredWidth = (defaultWidth * numberOfFields)
+        val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
+        val widthSize = View.MeasureSpec.getSize(widthMeasureSpec)
+        val width: Int
+
+        //Measure Width
+        width = when (widthMode) {
+            View.MeasureSpec.EXACTLY -> widthSize
+            View.MeasureSpec.AT_MOST -> Math.min(desiredWidth, widthSize)
+            View.MeasureSpec.UNSPECIFIED -> desiredWidth
+            else -> desiredWidth
         }
+        singleFieldWidth = width/numberOfFields
+        distanceInBetweenDp = singleFieldWidth/(numberOfFields-1)
+
+
+        val desiredHeight = singleFieldWidth
+        val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
+        val heightSize = View.MeasureSpec.getSize(heightMeasureSpec)
+        val height: Int
+
+        //Measure Height
+        height = when (heightMode) {
+            View.MeasureSpec.EXACTLY -> heightSize
+            View.MeasureSpec.AT_MOST -> Math.min(desiredHeight, heightSize)
+            View.MeasureSpec.UNSPECIFIED -> desiredHeight
+            else -> desiredHeight
+        }
+
+        setMeasuredDimension(width, height)
     }
 
     override fun onDraw(canvas: Canvas?) {
 
         for (i in 0 until numberOfFields){
-            if(shape == Shape.LINE){
-                canvas?.drawLine(((i*singleFieldWidth)+(distanceInBetweenDp/2)).toFloat(),100f,(((i*singleFieldWidth)+singleFieldWidth)-(distanceInBetweenDp/2)).toFloat(),100f,mArcPaint)
-            }else{
-                canvas?.drawCircle(((i*singleFieldWidth)+(distanceInBetweenDp/2))+(singleFieldWidth/2).toFloat(),100f,circleRadiusDp,mArcPaint)
+
+            val x1 = (i*singleFieldWidth)
+            val padding = (distanceInBetweenDp/2)
+            val paddedX1 = (x1 + padding).toFloat()
+            val paddedX2 = ((x1+singleFieldWidth)-padding).toFloat()
+
+            when(shape){
+                Shape.LINE -> {
+                    canvas?.drawLine(paddedX1,0f,paddedX2,0f,mArcPaint)
+                }
+                Shape.CIRCLE -> {
+                    canvas?.drawCircle(paddedX1+(singleFieldWidth/2).toFloat(),0f,circleRadiusDp,mArcPaint)
+                }
+                Shape.SQUARE -> {
+                    canvas?.drawRect(paddedX1,0f,paddedX2,paddedX2-paddedX1,mArcPaint)
+                }
             }
         }
 
@@ -136,7 +172,7 @@ class PinField(context: Context) : View(context), View.OnClickListener{
 
     override fun onCreateInputConnection(outAttrs: EditorInfo): InputConnection {
         outAttrs.imeOptions = EditorInfo.IME_ACTION_DONE
-        outAttrs.inputType = inputType
+        outAttrs.inputType = inputType.inputType
         return MyInputConnection(this,true)
     }
 
