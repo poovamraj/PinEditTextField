@@ -4,35 +4,22 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
-import android.graphics.drawable.Drawable
-import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
-import android.text.Editable
-import android.text.InputType
-import android.text.SpannableStringBuilder
+import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
-import android.view.inputmethod.BaseInputConnection
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputConnection
-import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 
 
 /**
  * Created by poovam-5255 on 3/3/2018.
  * View where all the magic happens
  */
-class PinField(context: Context) : View(context), View.OnClickListener{
+class PinField : TextView {
 
     enum class Shape{
         CIRCLE,LINE,SQUARE
     }
-
-    enum class KeyboardType(val inputType: Int){
-        TEXT(InputType.TYPE_CLASS_TEXT),NUMBER(InputType.TYPE_CLASS_NUMBER)
-    }
-
-    private var fieldBackground: Drawable? = null
 
     private val defaultWidth = Util.dpToPx(60).toInt()
 
@@ -41,10 +28,6 @@ class PinField(context: Context) : View(context), View.OnClickListener{
     var circleRadiusDp = Util.dpToPx(10)
 
     var isCircleFilled = false
-
-    var mText: SpannableStringBuilder = SpannableStringBuilder()
-
-    val inputType = KeyboardType.TEXT
 
     var distanceInBetweenDp = Util.dpToPx(15).toInt()
 
@@ -63,9 +46,9 @@ class PinField(context: Context) : View(context), View.OnClickListener{
     var mTextPaddingFromBottom = Util.dpToPx(3)
 
     init {
+        isFocusable = true
         isFocusableInTouchMode = true
-
-
+        limitCharsToNoOfFields()
         setWillNotDraw(false)
 
         mArcPaint.color = ContextCompat.getColor(context,R.color.colorAccent)
@@ -77,18 +60,15 @@ class PinField(context: Context) : View(context), View.OnClickListener{
         mTextPaint.isAntiAlias = true
         mTextPaint.textSize = mTextSize
         mTextPaint.style = Paint.Style.FILL
-
-        setOnClickListener(this)
-
     }
 
-    constructor(context: Context, attr: AttributeSet) : this(context)
+    constructor(context: Context): super(context)
 
-    constructor(context: Context,attr: AttributeSet,defStyle: Int) : this(context,attr)
+    constructor(context: Context, attr: AttributeSet) : super(context,attr)
 
-    fun setFieldBackground(@DrawableRes drawableRes: Int ){
-        fieldBackground = ContextCompat.getDrawable(context,drawableRes)
-    }
+    constructor(context: Context,attr: AttributeSet,defStyle: Int) : super(context,attr,defStyle)
+
+    constructor(context: Context,attr: AttributeSet,defStyle: Int,defStyleRes:Int) : super(context, attr, defStyle, defStyleRes)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
@@ -133,7 +113,7 @@ class PinField(context: Context) : View(context), View.OnClickListener{
             val paddedX1 = (x1 + padding).toFloat()
             val paddedX2 = ((x1+singleFieldWidth)-padding).toFloat()
             val y = paddedX2-paddedX1
-            val character:Char? = mText.getOrNull(i)
+            val character:Char? = text?.getOrNull(i)
 
             when(shape){
                 Shape.LINE -> {
@@ -149,8 +129,6 @@ class PinField(context: Context) : View(context), View.OnClickListener{
             }
 
         }
-
-        super.onDraw(canvas)
     }
 
     private fun drawChar(canvas: Canvas?,textPaint: Paint,text:String){
@@ -165,30 +143,14 @@ class PinField(context: Context) : View(context), View.OnClickListener{
         canvas?.drawText(text, x, y, textPaint)
     }
 
-    override fun onClick(v: View?) {
-        requestFocus()
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    override fun onCheckIsTextEditor(): Boolean {
+        return true
     }
 
-    override fun onCreateInputConnection(outAttrs: EditorInfo): InputConnection {
-        outAttrs.imeOptions = EditorInfo.IME_ACTION_DONE
-        outAttrs.inputType = inputType.inputType
-        return MyInputConnection(this,true)
-    }
 
-    inner class MyInputConnection internal constructor(private val targetView: PinField, fullEditor: Boolean) : BaseInputConnection(targetView, fullEditor) {
-
-        private var mEditable: SpannableStringBuilder
-
-        init {
-            val customView = targetView
-            mEditable = customView.mText
-        }
-
-        override fun getEditable(): Editable {
-            targetView.invalidate()
-            return mEditable
-        }
+    private fun limitCharsToNoOfFields(){
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = InputFilter.LengthFilter(numberOfFields)
+        filters = filterArray
     }
 }
