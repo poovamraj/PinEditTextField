@@ -23,7 +23,7 @@ class PinField : TextView {
 
     private val defaultWidth = Util.dpToPx(60).toInt()
 
-    var shape = Shape.LINE
+    var shape = Shape.SQUARE
 
     var circleRadiusDp = Util.dpToPx(10)
 
@@ -45,11 +45,14 @@ class PinField : TextView {
 
     var mTextPaddingFromBottom = Util.dpToPx(3)
 
+    var yPadding = Util.dpToPx(10)
+
     init {
         isFocusable = true
         isFocusableInTouchMode = true
         limitCharsToNoOfFields()
         setWillNotDraw(false)
+        maxLines = 1
 
         mArcPaint.color = ContextCompat.getColor(context,R.color.colorAccent)
         mArcPaint.isAntiAlias = true
@@ -112,11 +115,11 @@ class PinField : TextView {
             val padding = (distanceInBetweenDp/2)
             val paddedX1 = (x1 + padding).toFloat()
             val paddedX2 = ((x1+singleFieldWidth)-padding).toFloat()
-            val y = paddedX2-paddedX1
             val character:Char? = text?.getOrNull(i)
 
             when(shape){
                 Shape.LINE -> {
+                    val y = height - yPadding
                     canvas?.drawLine(paddedX1,y,paddedX2,y,mArcPaint)
                     if(character!=null) canvas?.drawText(character.toString(),((paddedX2-paddedX1)-mTextPaint.textSize)+paddedX1,(y-lineThicknessDp)-mTextPaddingFromBottom,mTextPaint)
                 }
@@ -124,7 +127,10 @@ class PinField : TextView {
                     canvas?.drawCircle(paddedX1+(singleFieldWidth/2).toFloat(),0f,circleRadiusDp,mArcPaint)
                 }
                 Shape.SQUARE -> {
-                    canvas?.drawRect(paddedX1,0f,paddedX2,y,mArcPaint)
+                    val squareHeight = paddedX2-paddedX1
+                    val y1 = (height/2)-(squareHeight/2)
+                    val y2 = (height/2)+(squareHeight/2)
+                    canvas?.drawRect(paddedX1,y1,paddedX2,y2,mArcPaint)
                 }
             }
 
