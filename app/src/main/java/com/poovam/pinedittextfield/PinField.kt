@@ -15,15 +15,9 @@ import android.widget.TextView
  * Created by poovam-5255 on 3/3/2018.
  * View where all the magic happens
  */
-class PinField : TextView {
-
-    enum class Shape{
-        CIRCLE,LINE,SQUARE
-    }
+open internal class PinField : TextView {
 
     private val defaultWidth = Util.dpToPx(60).toInt()
-
-    var shape = Shape.SQUARE
 
     var circleRadiusDp = Util.dpToPx(10)
 
@@ -33,7 +27,7 @@ class PinField : TextView {
 
     var numberOfFields = 4
 
-    private var singleFieldWidth = 0
+    protected var singleFieldWidth = 0
 
     var lineThicknessDp = Util.dpToPx(1)
 
@@ -48,8 +42,6 @@ class PinField : TextView {
     var yPadding = Util.dpToPx(10)
 
     init {
-        isFocusable = true
-        isFocusableInTouchMode = true
         limitCharsToNoOfFields()
         setWillNotDraw(false)
         maxLines = 1
@@ -107,34 +99,9 @@ class PinField : TextView {
         setMeasuredDimension(width, height)
     }
 
-    override fun onDraw(canvas: Canvas?) {
 
-        for (i in 0 until numberOfFields){
-
-            val x1 = (i*singleFieldWidth)
-            val padding = (distanceInBetweenDp/2)
-            val paddedX1 = (x1 + padding).toFloat()
-            val paddedX2 = ((x1+singleFieldWidth)-padding).toFloat()
-            val character:Char? = text?.getOrNull(i)
-
-            when(shape){
-                Shape.LINE -> {
-                    val y = height - yPadding
-                    canvas?.drawLine(paddedX1,y,paddedX2,y,mArcPaint)
-                    if(character!=null) canvas?.drawText(character.toString(),((paddedX2-paddedX1)-mTextPaint.textSize)+paddedX1,(y-lineThicknessDp)-mTextPaddingFromBottom,mTextPaint)
-                }
-                Shape.CIRCLE -> {
-                    canvas?.drawCircle(paddedX1+(singleFieldWidth/2).toFloat(),0f,circleRadiusDp,mArcPaint)
-                }
-                Shape.SQUARE -> {
-                    val squareHeight = paddedX2-paddedX1
-                    val y1 = (height/2)-(squareHeight/2)
-                    val y2 = (height/2)+(squareHeight/2)
-                    canvas?.drawRect(paddedX1,y1,paddedX2,y2,mArcPaint)
-                }
-            }
-
-        }
+    final override fun setWillNotDraw(willNotDraw: Boolean) {
+        super.setWillNotDraw(willNotDraw)
     }
 
     private fun drawChar(canvas: Canvas?,textPaint: Paint,text:String){
