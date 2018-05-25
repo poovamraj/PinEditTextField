@@ -4,6 +4,8 @@ import android.content.res.Resources;
 
 /**
  * Created by poovam-5255 on 3/3/2018.
+ *
+ * Util class to contain helper methods
  */
 
 public class Util {

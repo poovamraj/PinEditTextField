@@ -6,6 +6,9 @@ import android.util.AttributeSet
 
 /**
  * Created by poovam-5255 on 5/23/2018.
+ *
+ * Can be used for password
+ * Doesn't show the entered characters in view
  */
 class CirclePinField: PinField{
 
@@ -14,8 +17,6 @@ class CirclePinField: PinField{
     constructor(context: Context, attr: AttributeSet) : super(context,attr)
 
     constructor(context: Context, attr: AttributeSet, defStyle: Int) : super(context,attr,defStyle)
-
-    constructor(context: Context, attr: AttributeSet, defStyle: Int, defStyleRes:Int) : super(context, attr, defStyle, defStyleRes)
 
     override fun onDraw(canvas: Canvas?) {
 

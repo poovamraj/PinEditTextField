@@ -5,17 +5,16 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.AppCompatTextView
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
-import android.widget.TextView
-
 
 /**
  * Created by poovam-5255 on 3/3/2018.
  * View where all the magic happens
  */
-open internal class PinField : TextView {
+open class PinField : AppCompatTextView {
 
     private val defaultWidth = Util.dpToPx(60).toInt()
 
@@ -62,8 +61,6 @@ open internal class PinField : TextView {
     constructor(context: Context, attr: AttributeSet) : super(context,attr)
 
     constructor(context: Context,attr: AttributeSet,defStyle: Int) : super(context,attr,defStyle)
-
-    constructor(context: Context,attr: AttributeSet,defStyle: Int,defStyleRes:Int) : super(context, attr, defStyle, defStyleRes)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
