@@ -5,7 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.AppCompatEditText
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
@@ -14,7 +14,7 @@ import android.view.View
  * Created by poovam-5255 on 3/3/2018.
  * View where all the magic happens
  */
-open class PinField : AppCompatTextView {
+open class PinField : AppCompatEditText {
 
     private val defaultWidth = Util.dpToPx(60).toInt()
 
