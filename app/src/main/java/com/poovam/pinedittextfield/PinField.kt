@@ -1,14 +1,15 @@
 package com.poovam.pinedittextfield
 
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Rect
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatEditText
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+
+
 
 /**
  * Created by poovam-5255 on 3/3/2018.
@@ -40,6 +41,22 @@ open class PinField : AppCompatEditText {
 
     var yPadding = Util.dpToPx(10)
 
+    /**
+     * Highlight works only for square and line field
+     */
+    var isHighlightEnabled = true
+
+    var filledPaint = Paint()
+
+    var highLightThickness = 2
+        set(value) {
+            field = value
+            filledPaint.strokeWidth = lineThicknessDp + value
+            invalidate()
+        }
+
+    var onTextCompleteListener: OnTextCompleteListener? = null
+
     init {
         limitCharsToNoOfFields()
         setWillNotDraw(false)
@@ -54,6 +71,9 @@ open class PinField : AppCompatEditText {
         mTextPaint.isAntiAlias = true
         mTextPaint.textSize = mTextSize
         mTextPaint.style = Paint.Style.FILL
+
+        filledPaint = Paint(mArcPaint)
+        filledPaint.strokeWidth = lineThicknessDp+highLightThickness
     }
 
     constructor(context: Context): super(context)
@@ -101,16 +121,12 @@ open class PinField : AppCompatEditText {
         super.setWillNotDraw(willNotDraw)
     }
 
-    private fun drawChar(canvas: Canvas?,textPaint: Paint,text:String){
-        val r = Rect()
-        canvas?.getClipBounds(r)
-        val cHeight = r.height()
-        val cWidth = r.width()
-        textPaint.textAlign = Paint.Align.LEFT
-        textPaint.getTextBounds(text, 0, text.length, r)
-        val x = cWidth / 2f - r.width() / 2f - r.left
-        val y = cHeight / 2f + r.height() / 2f - r.bottom
-        canvas?.drawText(text, x, y, textPaint)
+    fun getApproxXToCenterText(text: String, widthToFitStringInto: Int): Int {
+        val p = Paint()
+        p.typeface = typeface
+        p.textSize = mTextSize
+        val textWidth = p.measureText(text)
+        return ((widthToFitStringInto - textWidth) / 2f).toInt() - (mTextSize / 2f).toInt()
     }
 
     override fun onCheckIsTextEditor(): Boolean {
@@ -122,5 +138,18 @@ open class PinField : AppCompatEditText {
         val filterArray = arrayOfNulls<InputFilter>(1)
         filterArray[0] = InputFilter.LengthFilter(numberOfFields)
         filters = filterArray
+    }
+
+    override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
+        super.onTextChanged(text, start, lengthBefore, lengthAfter)
+        if (text != null && text.length == numberOfFields){
+            onTextCompleteListener?.onTextComplete(text.toString())
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(windowToken, 0)
+        }
+    }
+
+    interface OnTextCompleteListener {
+        fun onTextComplete(enteredText: String)
     }
 }

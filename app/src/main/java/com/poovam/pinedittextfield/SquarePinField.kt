@@ -27,13 +27,19 @@ class SquarePinField : PinField{
             val padding = (distanceInBetweenDp/2)
             val paddedX1 = (x1 + padding).toFloat()
             val paddedX2 = ((x1+singleFieldWidth)-padding).toFloat()
+            val squareHeight = paddedX2-paddedX1
+            val paddedY1 = (height/2)-(squareHeight/2)
+            val paddedY2 = (height/2)+(squareHeight/2)
             val character:Char? = text?.getOrNull(i)
 
-            val squareHeight = paddedX2-paddedX1
-            val y1 = (height/2)-(squareHeight/2)
-            val y2 = (height/2)+(squareHeight/2)
-            canvas?.drawRect(paddedX1,y1,paddedX2,y2,mArcPaint)
-
+            canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2,mArcPaint)
+            if(character!=null) {
+                val xTextPadding = ((paddedX2-paddedX1)-textSize)/2
+                canvas?.drawText(character.toString(),paddedX1+xTextPadding,paddedY2-paddedY1,mTextPaint)
+                if(isHighlightEnabled){
+                    canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2,filledPaint)
+                }
+            }
         }
     }
 }
