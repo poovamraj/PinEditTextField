@@ -29,7 +29,7 @@ open class PinField : AppCompatEditText {
 
     protected var singleFieldWidth = 0
 
-    var lineThicknessDp = Util.dpToPx(1)
+    var lineThicknessDp = Util.dpToPx(2)
 
     var mArcPaint = Paint()
 
@@ -48,7 +48,7 @@ open class PinField : AppCompatEditText {
 
     var filledPaint = Paint()
 
-    var highLightThickness = 2
+    var highLightThickness = 1
         set(value) {
             field = value
             filledPaint.strokeWidth = lineThicknessDp + value
