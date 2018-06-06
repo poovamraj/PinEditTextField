@@ -30,12 +30,12 @@ class SquarePinField : PinField{
             val squareHeight = paddedX2-paddedX1
             val paddedY1 = (height/2)-(squareHeight/2)
             val paddedY2 = (height/2)+(squareHeight/2)
+            val textX = ((paddedX2-paddedX1)/2)+paddedX1
             val character:Char? = text?.getOrNull(i)
 
             canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2,mArcPaint)
             if(character!=null) {
-                val xTextPadding = ((paddedX2-paddedX1)-textSize)/2
-                canvas?.drawText(character.toString(),paddedX1+xTextPadding,paddedY2-paddedY1,mTextPaint)
+                canvas?.drawText(character.toString(),textX,paddedY2-paddedY1,mTextPaint)
                 if(isHighlightEnabled){
                     canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2,filledPaint)
                 }

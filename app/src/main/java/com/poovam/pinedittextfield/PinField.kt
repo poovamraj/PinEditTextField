@@ -70,6 +70,7 @@ open class PinField : AppCompatEditText {
         mTextPaint.color = ContextCompat.getColor(context,R.color.colorAccent)
         mTextPaint.isAntiAlias = true
         mTextPaint.textSize = mTextSize
+        mTextPaint.textAlign = Paint.Align.CENTER
         mTextPaint.style = Paint.Style.FILL
 
         filledPaint = Paint(mArcPaint)

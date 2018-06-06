@@ -26,11 +26,12 @@ class LinePinField : PinField {
             val paddedX1 = (x1 + padding).toFloat()
             val paddedX2 = ((x1+singleFieldWidth)-padding).toFloat()
             val paddedY1 = height - yPadding
+            val textX = ((paddedX2-paddedX1)/2)+paddedX1
             val character:Char? = text?.getOrNull(i)
 
             canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1,mArcPaint)
             if(character!=null) {
-                canvas?.drawText(character.toString(),((paddedX2-paddedX1)-mTextPaint.textSize)+paddedX1,(paddedY1-lineThicknessDp)-mTextPaddingFromBottom,mTextPaint)
+                canvas?.drawText(character.toString(),textX,(paddedY1-lineThicknessDp)-mTextPaddingFromBottom,mTextPaint)
                 if(isHighlightEnabled){
                     canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1,filledPaint)
                 }
