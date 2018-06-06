@@ -29,9 +29,9 @@ open class PinField : AppCompatEditText {
 
     var lineThicknessDp = Util.dpToPx(2)
 
-    var mArcPaint = Paint()
+    var fieldColor = Paint()
 
-    var mTextPaint = Paint()
+    var textColor = Paint()
 
     var yPadding = Util.dpToPx(10)
 
@@ -40,12 +40,12 @@ open class PinField : AppCompatEditText {
      */
     var isHighlightEnabled = true
 
-    var filledPaint = Paint()
+    var highlightColor = Paint()
 
     var highLightThickness = 1
         set(value) {
             field = value
-            filledPaint.strokeWidth = lineThicknessDp + value
+            highlightColor.strokeWidth = lineThicknessDp + value
             invalidate()
         }
 
@@ -56,19 +56,19 @@ open class PinField : AppCompatEditText {
         setWillNotDraw(false)
         maxLines = 1
 
-        mArcPaint.color = ContextCompat.getColor(context,R.color.colorAccent)
-        mArcPaint.isAntiAlias = true
-        mArcPaint.style = Paint.Style.STROKE
-        mArcPaint.strokeWidth = lineThicknessDp
+        fieldColor.color = ContextCompat.getColor(context,R.color.colorAccent)
+        fieldColor.isAntiAlias = true
+        fieldColor.style = Paint.Style.STROKE
+        fieldColor.strokeWidth = lineThicknessDp
 
-        mTextPaint.color = ContextCompat.getColor(context,R.color.colorAccent)
-        mTextPaint.isAntiAlias = true
-        mTextPaint.textSize = textSize
-        mTextPaint.textAlign = Paint.Align.CENTER
-        mTextPaint.style = Paint.Style.FILL
+        textColor.color = ContextCompat.getColor(context,R.color.colorAccent)
+        textColor.isAntiAlias = true
+        textColor.textSize = textSize
+        textColor.textAlign = Paint.Align.CENTER
+        textColor.style = Paint.Style.FILL
 
-        filledPaint = Paint(mArcPaint)
-        filledPaint.strokeWidth = lineThicknessDp+highLightThickness
+        highlightColor = Paint(fieldColor)
+        highlightColor.strokeWidth = lineThicknessDp+highLightThickness
     }
 
     constructor(context: Context): super(context)

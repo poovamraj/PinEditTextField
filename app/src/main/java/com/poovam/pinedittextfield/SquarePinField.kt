@@ -31,14 +31,14 @@ class SquarePinField : PinField{
             val paddedY1 = (height/2)-(squareHeight/2)
             val paddedY2 = (height/2)+(squareHeight/2)
             val textX = ((paddedX2-paddedX1)/2)+paddedX1
-            val textY = ((paddedY2-paddedY1)/2+paddedY1)+lineThicknessDp+(mTextPaint.textSize/4)
+            val textY = ((paddedY2-paddedY1)/2+paddedY1)+lineThicknessDp+(textColor.textSize/4)
             val character:Char? = text?.getOrNull(i)
 
-            canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2,mArcPaint)
+            canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, fieldColor)
             if(character!=null) {
-                canvas?.drawText(character.toString(),textX,textY,mTextPaint)
+                canvas?.drawText(character.toString(),textX,textY, textColor)
                 if(isHighlightEnabled){
-                    canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2,filledPaint)
+                    canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, highlightColor)
                 }
             }
         }

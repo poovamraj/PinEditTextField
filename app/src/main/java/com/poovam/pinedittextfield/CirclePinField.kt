@@ -20,7 +20,7 @@ class CirclePinField: PinField{
     constructor(context: Context, attr: AttributeSet, defStyle: Int) : super(context,attr,defStyle)
 
     init {
-        filledPaint.strokeWidth = circleRadiusDp
+        highlightColor.strokeWidth = circleRadiusDp
         inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
     }
 
@@ -31,10 +31,10 @@ class CirclePinField: PinField{
             val x1 = (i*singleFieldWidth)
             val character:Char? = text?.getOrNull(i)
 
-            canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp,mArcPaint)
+            canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp, fieldColor)
 
             if(character!=null) {
-                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp/2,filledPaint)
+                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp/2, highlightColor)
             }
         }
     }
