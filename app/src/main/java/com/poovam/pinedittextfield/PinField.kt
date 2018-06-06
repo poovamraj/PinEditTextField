@@ -37,8 +37,6 @@ open class PinField : AppCompatEditText {
 
     var mTextSize = Util.dpToPx(30)
 
-    var mTextPaddingFromBottom = Util.dpToPx(3)
-
     var yPadding = Util.dpToPx(10)
 
     /**
