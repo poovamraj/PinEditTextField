@@ -21,8 +21,6 @@ open class PinField : AppCompatEditText {
 
     var circleRadiusDp = Util.dpToPx(10)
 
-    var isCircleFilled = false
-
     var distanceInBetweenDp = Util.dpToPx(15).toInt()
 
     var numberOfFields = 4
