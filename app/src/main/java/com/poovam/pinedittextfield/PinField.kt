@@ -35,8 +35,6 @@ open class PinField : AppCompatEditText {
 
     var mTextPaint = Paint()
 
-    var mTextSize = Util.dpToPx(30)
-
     var yPadding = Util.dpToPx(10)
 
     /**
@@ -67,7 +65,7 @@ open class PinField : AppCompatEditText {
 
         mTextPaint.color = ContextCompat.getColor(context,R.color.colorAccent)
         mTextPaint.isAntiAlias = true
-        mTextPaint.textSize = mTextSize
+        mTextPaint.textSize = textSize
         mTextPaint.textAlign = Paint.Align.CENTER
         mTextPaint.style = Paint.Style.FILL
 
@@ -118,14 +116,6 @@ open class PinField : AppCompatEditText {
 
     final override fun setWillNotDraw(willNotDraw: Boolean) {
         super.setWillNotDraw(willNotDraw)
-    }
-
-    fun getApproxXToCenterText(text: String, widthToFitStringInto: Int): Int {
-        val p = Paint()
-        p.typeface = typeface
-        p.textSize = mTextSize
-        val textWidth = p.measureText(text)
-        return ((widthToFitStringInto - textWidth) / 2f).toInt() - (mTextSize / 2f).toInt()
     }
 
     override fun onCheckIsTextEditor(): Boolean {
