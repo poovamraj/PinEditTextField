@@ -2,6 +2,8 @@ package com.poovam.pinedittextfield
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
+import android.support.v4.content.ContextCompat
 import android.text.InputType
 import android.util.AttributeSet
 
@@ -13,15 +15,46 @@ import android.util.AttributeSet
  */
 class CirclePinField: PinField{
 
+    var fillerColor =  ContextCompat.getColor(context,R.color.colorAccent)
+        set(value){
+            field = value
+            fillerPaint.color = fillerColor
+            invalidate()
+        }
+
+    var circleRadiusDp = Util.dpToPx(10f)
+        set(value){
+            field = value
+            fillerPaint.strokeWidth = field
+            invalidate()
+        }
+
+    var fillerPaint = Paint(fieldPaint)
+
     constructor(context: Context): super(context)
 
-    constructor(context: Context, attr: AttributeSet) : super(context,attr)
+    constructor(context: Context, attr: AttributeSet) : super(context,attr){
+        initParams(attr)
+    }
 
-    constructor(context: Context, attr: AttributeSet, defStyle: Int) : super(context,attr,defStyle)
+    constructor(context: Context,attr: AttributeSet,defStyle: Int) : super(context,attr,defStyle){
+        initParams(attr)
+    }
+
+    private fun initParams(attr: AttributeSet){
+        val a = context.theme.obtainStyledAttributes(attr, R.styleable.CirclePinField, 0,0)
+
+        try {
+            circleRadiusDp = a.getDimension(R.styleable.CirclePinField_circleRadius, circleRadiusDp)
+            fillerColor = a.getColor(R.styleable.CirclePinField_fillerColor, fillerColor)
+        } finally {
+            a.recycle()
+        }
+    }
 
     init {
-        highlightColor.strokeWidth = circleRadiusDp
         inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+        fillerPaint.strokeWidth = circleRadiusDp
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -31,10 +64,14 @@ class CirclePinField: PinField{
             val x1 = (i*singleFieldWidth)
             val character:Char? = text?.getOrNull(i)
 
-            canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp, fieldColor)
+            if(isHighlightEnabled && hasFocus()){
+                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp, highlightPaint)
+            }else{
+                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp, fieldPaint)
+            }
 
             if(character!=null) {
-                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp/2, highlightColor)
+                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp/2, fillerPaint)
             }
         }
     }

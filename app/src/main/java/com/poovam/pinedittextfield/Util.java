@@ -9,11 +9,7 @@ import android.content.res.Resources;
  */
 
 public class Util {
-    public static float dpToPx(int dp) {
+    public static float dpToPx(float dp) {
         return  (dp * Resources.getSystem().getDisplayMetrics().density);
-    }
-
-    public static float pxToDp(int px) {
-        return  (px / Resources.getSystem().getDisplayMetrics().density);
     }
 }

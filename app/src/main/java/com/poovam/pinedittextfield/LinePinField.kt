@@ -22,20 +22,22 @@ class LinePinField : PinField {
         for (i in 0 until numberOfFields){
 
             val x1 = (i*singleFieldWidth)
-            val padding = (distanceInBetweenDp/2)
-            val paddedX1 = (x1 + padding).toFloat()
-            val paddedX2 = ((x1+singleFieldWidth)-padding).toFloat()
+            val padding = (if (distanceInBetween!= defDistanceInBetweenValue) distanceInBetween else getDefaultDistanceInBetween())/2
+            val paddedX1 = (x1 + padding)
+            val paddedX2 = ((x1+singleFieldWidth)-padding)
             val paddedY1 = height - yPadding
             val textX = ((paddedX2-paddedX1)/2)+paddedX1
-            val textY = (paddedY1-lineThicknessDp)-(textColor.textSize/4)
+            val textY = (paddedY1- lineThickness)-(textPaint.textSize/4)
             val character:Char? = text?.getOrNull(i)
 
-            canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, fieldColor)
+            if(isHighlightEnabled && hasFocus()){
+                canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)
+            }else{
+                canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, fieldPaint)
+            }
+
             if(character!=null) {
-                canvas?.drawText(character.toString(),textX,textY, textColor)
-                if(isHighlightEnabled){
-                    canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightColor)
-                }
+                canvas?.drawText(character.toString(),textX,textY, textPaint)
             }
 
         }

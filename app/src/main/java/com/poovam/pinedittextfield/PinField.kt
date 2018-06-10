@@ -17,37 +17,62 @@ import android.view.inputmethod.InputMethodManager
  */
 open class PinField : AppCompatEditText {
 
-    private val defaultWidth = Util.dpToPx(60).toInt()
+    private val defaultWidth = Util.dpToPx(60f).toInt()
 
-    var circleRadiusDp = Util.dpToPx(10)
+    protected val defDistanceInBetweenValue = -1f
 
-    var distanceInBetweenDp = Util.dpToPx(15).toInt()
+    protected var distanceInBetween:Float = defDistanceInBetweenValue
+        set(value) {
+            field = value
+            requestLayout()
+            invalidate()
+        }
 
     var numberOfFields = 4
+    set(value){
+        field = value
+        limitCharsToNoOfFields()
+        invalidate()
+    }
 
     protected var singleFieldWidth = 0
 
-    var lineThicknessDp = Util.dpToPx(2)
-
-    var fieldColor = Paint()
-
-    var textColor = Paint()
-
-    var yPadding = Util.dpToPx(10)
-
-    /**
-     * Highlight works only for square and line field
-     */
-    var isHighlightEnabled = true
-
-    var highlightColor = Paint()
-
-    var highLightThickness = 1
-        set(value) {
+    var lineThickness = Util.dpToPx(1.5f)
+        set(value){
             field = value
-            highlightColor.strokeWidth = lineThicknessDp + value
+            fieldPaint.strokeWidth  = field
+            highlightPaint.strokeWidth = highLightThickness
             invalidate()
         }
+
+    var fieldColor = ContextCompat.getColor(context,R.color.colorAccent)
+        set(value){
+            field = value
+            fieldPaint.color = field
+            invalidate()
+        }
+
+    var highlightPaintColor = ContextCompat.getColor(context,R.color.colorAccent)
+        set(value){
+            field = value
+            highlightPaint.color = field
+            invalidate()
+        }
+
+    protected var fieldPaint = Paint()
+
+    protected var textPaint = Paint()
+
+    protected var highlightPaint = Paint()
+
+    protected var yPadding = Util.dpToPx(10f)
+
+    protected var isHighlightEnabled = true
+
+    private var highLightThickness = lineThickness
+    get(){
+        return lineThickness + lineThickness*0.25f
+    }
 
     var onTextCompleteListener: OnTextCompleteListener? = null
 
@@ -56,26 +81,46 @@ open class PinField : AppCompatEditText {
         setWillNotDraw(false)
         maxLines = 1
 
-        fieldColor.color = ContextCompat.getColor(context,R.color.colorAccent)
-        fieldColor.isAntiAlias = true
-        fieldColor.style = Paint.Style.STROKE
-        fieldColor.strokeWidth = lineThicknessDp
+        fieldPaint.color = fieldColor
+        fieldPaint.isAntiAlias = true
+        fieldPaint.style = Paint.Style.STROKE
+        fieldPaint.strokeWidth = lineThickness
 
-        textColor.color = ContextCompat.getColor(context,R.color.colorAccent)
-        textColor.isAntiAlias = true
-        textColor.textSize = textSize
-        textColor.textAlign = Paint.Align.CENTER
-        textColor.style = Paint.Style.FILL
+        textPaint.color = currentTextColor
+        textPaint.isAntiAlias = true
+        textPaint.textSize = textSize
+        textPaint.textAlign = Paint.Align.CENTER
+        textPaint.style = Paint.Style.FILL
 
-        highlightColor = Paint(fieldColor)
-        highlightColor.strokeWidth = lineThicknessDp+highLightThickness
+        highlightPaint = Paint(fieldPaint)
+        highlightPaint.color = highlightPaintColor
+        highlightPaint.strokeWidth =  highLightThickness
     }
 
     constructor(context: Context): super(context)
 
-    constructor(context: Context, attr: AttributeSet) : super(context,attr)
+    constructor(context: Context, attr: AttributeSet) : super(context,attr){
+        initParams(attr)
+    }
 
-    constructor(context: Context,attr: AttributeSet,defStyle: Int) : super(context,attr,defStyle)
+    constructor(context: Context,attr: AttributeSet,defStyle: Int) : super(context,attr,defStyle){
+        initParams(attr)
+    }
+
+    private fun initParams(attr: AttributeSet){
+        val a = context.theme.obtainStyledAttributes(attr, R.styleable.PinField, 0,0)
+
+        try {
+            numberOfFields = a.getInt(R.styleable.PinField_noOfFields, numberOfFields)
+            lineThickness = a.getDimension(R.styleable.PinField_lineThickness, lineThickness)
+            distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, defDistanceInBetweenValue)
+            fieldColor = a.getColor(R.styleable.PinField_fieldColor,fieldColor)
+            highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor,fieldColor)
+            isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled,isHighlightEnabled)
+        } finally {
+            a.recycle()
+        }
+    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
@@ -92,7 +137,6 @@ open class PinField : AppCompatEditText {
             else -> desiredWidth
         }
         singleFieldWidth = width/numberOfFields
-        distanceInBetweenDp = singleFieldWidth/(numberOfFields-1)
 
 
         val desiredHeight = singleFieldWidth
@@ -120,6 +164,9 @@ open class PinField : AppCompatEditText {
         return true
     }
 
+    protected fun getDefaultDistanceInBetween(): Float{
+        return (singleFieldWidth/(numberOfFields-1)).toFloat()
+    }
 
     private fun limitCharsToNoOfFields(){
         val filterArray = arrayOfNulls<InputFilter>(1)

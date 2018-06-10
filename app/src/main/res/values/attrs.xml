@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PinField">
+        <attr name="noOfFields" format="integer" />
+        <attr name="distanceInBetween" format="dimension" />
+        <attr name="lineThickness" format="dimension" />
+        <attr name="fieldColor" format="color" />
+        <attr name="highlightColor" format="color" />
+        <attr name="highlightEnabled" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CirclePinField">
+        <attr name="circleRadius" format="dimension" />
+        <attr name="fillerColor" format="color" />
+    </declare-styleable>
+</resources>
