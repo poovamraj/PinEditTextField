@@ -71,7 +71,7 @@ class CirclePinField: PinField{
             }
 
             if(character!=null) {
-                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp/2, fillerPaint)
+                canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),(circleRadiusDp/2)-highLightThickness, fillerPaint)
             }
         }
     }

@@ -45,7 +45,7 @@ open class PinField : AppCompatEditText {
             invalidate()
         }
 
-    var fieldColor = ContextCompat.getColor(context,R.color.colorAccent)
+    var fieldColor = ContextCompat.getColor(context,android.R.color.black)
         set(value){
             field = value
             fieldPaint.color = field
@@ -69,9 +69,9 @@ open class PinField : AppCompatEditText {
 
     protected var isHighlightEnabled = true
 
-    private var highLightThickness = lineThickness
+    var highLightThickness = lineThickness
     get(){
-        return lineThickness + lineThickness*0.25f
+        return lineThickness + lineThickness*0.5f
     }
 
     var onTextCompleteListener: OnTextCompleteListener? = null
@@ -115,7 +115,7 @@ open class PinField : AppCompatEditText {
             lineThickness = a.getDimension(R.styleable.PinField_lineThickness, lineThickness)
             distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, defDistanceInBetweenValue)
             fieldColor = a.getColor(R.styleable.PinField_fieldColor,fieldColor)
-            highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor,fieldColor)
+            highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor,highlightPaintColor)
             isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled,isHighlightEnabled)
         } finally {
             a.recycle()
