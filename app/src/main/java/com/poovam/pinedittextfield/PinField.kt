@@ -155,6 +155,9 @@ open class PinField : AppCompatEditText {
         setMeasuredDimension(width, height)
     }
 
+    override fun onSelectionChanged(selStart: Int, selEnd: Int) {
+        this.setSelection(this.text.length)
+    }
 
     final override fun setWillNotDraw(willNotDraw: Boolean) {
         super.setWillNotDraw(willNotDraw)
