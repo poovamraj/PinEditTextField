@@ -20,9 +20,30 @@
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
         app:circleRadius="15dp"
-        android:id="@+id/pinField"
+        android:id="@+id/circleField"
         android:background="@android:color/white"
         android:layout_marginTop="15dp"/>
 
 
+    <com.poovam.pinedittextfield.SquarePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:textSelectHandle="@drawable/text_handle"
+        app:circleRadius="15dp"
+        android:id="@+id/squareField"
+        android:background="@android:color/white"
+        android:layout_marginTop="15dp"/>
+
+    <com.poovam.pinedittextfield.LinePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:textSelectHandle="@drawable/text_handle"
+        app:circleRadius="15dp"
+        android:id="@+id/lineField"
+        android:background="@android:color/white"
+        android:layout_marginTop="15dp"/>
 </LinearLayout>

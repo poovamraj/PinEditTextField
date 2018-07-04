@@ -10,13 +10,18 @@ class SampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
-        val pinField = findViewById<PinField>(R.id.pinField)
-        pinField.onTextCompleteListener = object : PinField.OnTextCompleteListener{
+        val circleField = findViewById<PinField>(R.id.circleField)
+        val squareField = findViewById<PinField>(R.id.squareField)
+        val lineField = findViewById<PinField>(R.id.lineField)
+        val listener = object : PinField.OnTextCompleteListener{
             override fun onTextComplete(enteredText: String) {
                 Toast.makeText(this@SampleActivity,enteredText, Toast.LENGTH_SHORT).show()
             }
 
         }
+        circleField.onTextCompleteListener = listener
+        squareField.onTextCompleteListener = listener
+        lineField.onTextCompleteListener = listener
     }
 }
 
