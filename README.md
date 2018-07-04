@@ -1,2 +1,4 @@
 # PinEditTextField
-Work in progress:- Android library for pin edit text
+
+
+compile 'com.poovam:pin-edittext-field:1.0.0'
