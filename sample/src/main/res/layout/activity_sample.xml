@@ -8,11 +8,6 @@
     android:gravity="center_horizontal"
     android:background="@android:color/holo_blue_bright">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,16 +18,11 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:textSize="16sp"
-        app:circleRadius="15dp"
         android:textSelectHandle="@drawable/text_handle"
+        app:circleRadius="15dp"
         android:id="@+id/pinField"
         android:background="@android:color/white"
         android:layout_marginTop="15dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pin Edit Text Field"/>
 
 
 </LinearLayout>
