@@ -4,6 +4,8 @@
  
 This repository contains `PinEditTextField` that provides Pin Field widget for android with `Paste Functionality`
 which no other library provides.
+
+
 ![PinEntryEditText](http://i.giphy.com/3o7qDVApSTFl8DCU4E.gif)
 
 ## Features
