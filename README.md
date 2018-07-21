@@ -30,10 +30,43 @@ dependencies {
 ### Usage
 
 ```xml
+    <com.poovam.pinedittextfield.LinePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="16sp"                                              
+        android:textSelectHandle="@drawable/text_handle" // recommended
+        app:noOfFields="4"              
+        app:distanceInBetween="10dp"  // custom distance can be provided in between fields (applicable to all type of Pin Fields)                                               
+        app:fieldColor="@color/colorPrimary"  // custom color can be provided (applicable to all type of Pin Fields)
+        app:highlightColor="@color/colorAccent" // custom color can be provided (applicable to all type of Pin Fields)
+        app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all type of Pin Fields)
+        app:lineThickness="5dp" // line thickness can be provided (applicable to all type of Pin Fields)
+        android:id="@+id/lineField"/>
 
+    <com.poovam.pinedittextfield.SquarePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:noOfFields="4"                                                
+        android:textSelectHandle="@drawable/text_handle" // recommended
+        android:id="@+id/squareField"
+        android:layout_marginTop="15dp"/>
+
+    <com.poovam.pinedittextfield.CirclePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:noOfFields="4"                                                
+        android:textSize="16sp"
+        android:textSelectHandle="@drawable/text_handle" // recommended
+        app:circleRadius="15dp" // radius of the circle  (applicable only to Circle Pin Field)                                               
+        app:fillerColor="@color/colorPrimary" // color that can be provided inside circle  (applicable only to Circle Pin Field)
+        android:id="@+id/circleField"/>
 ```
 
-### Listen 
+### Listen to your Pin Field
 
 ```java
 final LinePinField linePinField = findViewById(R.id.lineField);
