@@ -85,6 +85,7 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 - Customize the number of fields you will be requiring.
 - Highly configurable with many attributes for your View.
 - Use any type of keyboard you would like for the View.
+- Customize the distance between your Pin Fields
 
 License
 =======
