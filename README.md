@@ -6,7 +6,7 @@ This repository contains `PinEditTextField` that provides Pin Field widget for a
 which no other library provides.
 
 
-![PinEntryEditText](http://i.giphy.com/3o7qDVApSTFl8DCU4E.gif)
+![PinEntryEditText](https://gph.is/2JIZb9x)
 
 ## Setup
 
