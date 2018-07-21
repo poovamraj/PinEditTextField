@@ -8,9 +8,14 @@ which no other library provides.
 
 ![PinEntryEditText](http://i.giphy.com/3o7qDVApSTFl8DCU4E.gif)
 
+## Usage
+
 ## Features
 
-## Usage
+- Allow your users to paste the characters into your Pin Field which no other library provides
+- Configure 3 different types of Pin Field Views to your app.
+- Customize the number of fields you will be requiring.
+- Highly configurable with many attributes for your View.
 
 License
 =======
