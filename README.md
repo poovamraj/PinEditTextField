@@ -3,12 +3,12 @@
  [ ![Download](https://api.bintray.com/packages/poovamraj/Android-Pin-Field/PinEditTextField/images/download.svg) ](https://bintray.com/poovamraj/Android-Pin-Field/PinEditTextField/_latestVersion)
  
 This repository contains `PinEditTextField` that provides Pin Field widget for android with `Paste Functionality`
-no other library provides.
-
+which no other library provides.
+![PinEntryEditText](http://i.giphy.com/3o7qDVApSTFl8DCU4E.gif)
 
 ## Features
 
-
+## Usage
 
 License
 =======
