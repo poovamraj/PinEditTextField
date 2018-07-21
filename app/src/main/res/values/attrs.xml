@@ -7,6 +7,7 @@
         <attr name="fieldColor" format="color" />
         <attr name="highlightColor" format="color" />
         <attr name="highlightEnabled" format="boolean" />
+        <attr name="isCustomBackground" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="CirclePinField">
