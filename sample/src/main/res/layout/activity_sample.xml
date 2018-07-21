@@ -5,25 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:background="@android:color/holo_blue_bright">
+    android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Pin Edit Text Field"/>
-
-    <com.poovam.pinedittextfield.CirclePinField
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:textSize="16sp"
-        android:textSelectHandle="@drawable/text_handle"
-        app:circleRadius="15dp"
-        android:id="@+id/circleField"
-        android:background="@android:color/white"
-        android:layout_marginTop="15dp"/>
-
 
     <com.poovam.pinedittextfield.SquarePinField
         android:layout_width="wrap_content"
@@ -33,7 +21,6 @@
         android:textSelectHandle="@drawable/text_handle"
         app:circleRadius="15dp"
         android:id="@+id/squareField"
-        android:background="@android:color/white"
         android:layout_marginTop="15dp"/>
 
     <com.poovam.pinedittextfield.LinePinField
@@ -44,6 +31,15 @@
         android:textSelectHandle="@drawable/text_handle"
         app:circleRadius="15dp"
         android:id="@+id/lineField"
-        android:background="@android:color/white"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
+
+    <com.poovam.pinedittextfield.CirclePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:textSelectHandle="@drawable/text_handle"
+        app:circleRadius="15dp"
+        android:id="@+id/circleField"
+        android:layout_marginTop="35dp"/>
 </LinearLayout>
