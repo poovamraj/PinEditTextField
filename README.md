@@ -37,11 +37,13 @@ dependencies {
         android:textSize="16sp"                                              
         android:textSelectHandle="@drawable/text_handle" // recommended
         app:noOfFields="4"              
-        app:distanceInBetween="10dp"  // custom distance can be provided in between fields (applicable to all type of Pin Fields)                                               
-        app:fieldColor="@color/colorPrimary"  // custom color can be provided (applicable to all type of Pin Fields)
-        app:highlightColor="@color/colorAccent" // custom color can be provided (applicable to all type of Pin Fields)
-        app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all type of Pin Fields)
-        app:lineThickness="5dp" // line thickness can be provided (applicable to all type of Pin Fields)
+        app:distanceInBetween="10dp"  // custom distance can be provided in between fields (applicable to all types of Pin Fields)                                               
+        app:fieldColor="@color/colorPrimary"  // custom color can be provided (applicable to all types of Pin Fields)
+        app:highlightColor="@color/colorAccent" // custom color can be provided (applicable to all types of Pin Fields)
+        app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all types of Pin Fields)
+        app:lineThickness="5dp" // line thickness can be provided (applicable to all types of Pin Fields)                                              
+        app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields
+        android:background="@color/colorPrimary"
         android:id="@+id/lineField"/>
 
     <com.poovam.pinedittextfield.SquarePinField
