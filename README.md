@@ -42,7 +42,7 @@ dependencies {
         app:highlightColor="@color/colorAccent" // custom color can be provided (applicable to all types of Pin Fields)
         app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all types of Pin Fields)
         app:lineThickness="5dp" // line thickness can be provided (applicable to all types of Pin Fields)                                              
-        app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields
+        app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields)
         android:background="@color/colorPrimary"
         android:id="@+id/lineField"/>
 
