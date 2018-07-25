@@ -52,7 +52,7 @@ open class PinField : AppCompatEditText {
             invalidate()
         }
 
-    var highlightPaintColor = ContextCompat.getColor(context,R.color.colorAccent)
+    var highlightPaintColor = ContextCompat.getColor(context,R.color.accent)
         set(value){
             field = value
             highlightPaint.color = field
