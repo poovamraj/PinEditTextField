@@ -24,7 +24,6 @@
         app:fieldColor="@color/colorPrimary"
         app:highlightColor="@color/colorAccent"
         app:highlightEnabled="true"
-        app:lineThickness="5dp"
         android:id="@+id/squareField"
         android:layout_marginTop="15dp"/>
 

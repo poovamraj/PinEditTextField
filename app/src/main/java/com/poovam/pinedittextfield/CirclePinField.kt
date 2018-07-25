@@ -15,7 +15,7 @@ import android.util.AttributeSet
  */
 class CirclePinField: PinField{
 
-    var fillerColor =  ContextCompat.getColor(context,R.color.colorAccent)
+    var fillerColor =  ContextCompat.getColor(context,R.color.accent)
         set(value){
             field = value
             fillerPaint.color = fillerColor
