@@ -23,7 +23,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.0.3'
+    implementation 'com.poovam:pin-edittext-field:1.0.4'
 }
 ```
 
