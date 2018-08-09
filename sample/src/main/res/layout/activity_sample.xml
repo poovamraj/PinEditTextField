@@ -16,7 +16,6 @@
     <com.poovam.pinedittextfield.SquarePinField
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
         app:noOfFields="4"
@@ -39,7 +38,7 @@
     <com.poovam.pinedittextfield.CirclePinField
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="number"
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
         app:circleRadius="15dp"
