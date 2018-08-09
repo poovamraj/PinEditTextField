@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
-import android.text.InputType
 import android.util.AttributeSet
 
 /**
@@ -53,7 +52,6 @@ class CirclePinField: PinField{
     }
 
     init {
-        inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         fillerPaint.strokeWidth = circleRadiusDp
     }
 
