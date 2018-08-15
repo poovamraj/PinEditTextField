@@ -22,7 +22,7 @@
         app:distanceInBetween="10dp"
         app:fieldColor="@color/colorPrimary"
         app:highlightColor="@color/colorAccent"
-        app:highlightEnabled="true"
+        app:isCursorEnabled="true"
         android:id="@+id/squareField"
         android:layout_marginTop="15dp"/>
 
@@ -32,6 +32,7 @@
         android:inputType="text"
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
+        app:isCursorEnabled="true"
         android:id="@+id/lineField"
         android:layout_marginTop="10dp"/>
 
