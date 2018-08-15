@@ -12,6 +12,8 @@ import android.util.AttributeSet
 
 class SquarePinField : PinField{
 
+    private val cursorPadding = Util.dpToPx(5f)
+
     constructor(context: Context): super(context)
 
     constructor(context: Context, attr: AttributeSet) : super(context,attr)
@@ -42,6 +44,13 @@ class SquarePinField : PinField{
 
             if(character!=null) {
                 canvas?.drawText(character.toString(),textX,textY, textPaint)
+            }
+
+            if(isCursorEnabled && hasFocus() && i == text?.length ?: 0){
+                val cursorPadding = cursorPadding + highLightThickness
+                val cursorY1 = paddedY1 + cursorPadding
+                val cursorY2 = paddedY2 - cursorPadding
+                drawCursor(canvas,textX,cursorY1,cursorY2,highlightPaint)
             }
         }
     }

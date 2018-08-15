@@ -1,6 +1,7 @@
 package com.poovam.pinedittextfield
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatEditText
@@ -59,6 +60,12 @@ open class PinField : AppCompatEditText {
             invalidate()
         }
 
+    var isCursorEnabled = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     protected var fieldPaint = Paint()
 
     protected var textPaint = Paint()
@@ -68,6 +75,12 @@ open class PinField : AppCompatEditText {
     protected var yPadding = Util.dpToPx(10f)
 
     protected var isHighlightEnabled = true
+
+    private var lastCursorChangeState: Long = -1
+
+    private var cursorCurrentVisible = true
+
+    private val cursorTimeout = 500L
 
     var isCustomBackground = false
     set(value) {
@@ -126,6 +139,7 @@ open class PinField : AppCompatEditText {
             highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor,highlightPaintColor)
             isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled,isHighlightEnabled)
             isCustomBackground = a.getBoolean(R.styleable.PinField_isCustomBackground,false)
+            isCursorEnabled = a.getBoolean(R.styleable.PinField_isCursorEnabled,false)
         } finally {
             a.recycle()
         }
@@ -193,6 +207,19 @@ open class PinField : AppCompatEditText {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(windowToken, 0)
         }
+    }
+
+    protected fun drawCursor(canvas: Canvas?, x: Float, y1: Float, y2: Float, paint: Paint){
+        if(System.currentTimeMillis() - lastCursorChangeState > 500) {
+            cursorCurrentVisible = !cursorCurrentVisible
+            lastCursorChangeState = System.currentTimeMillis()
+        }
+
+        if(cursorCurrentVisible){
+            canvas?.drawLine(x, y1, x, y2, paint)
+        }
+
+        postInvalidateDelayed(cursorTimeout)
     }
 
     final override fun setBackgroundResource(resId: Int) {

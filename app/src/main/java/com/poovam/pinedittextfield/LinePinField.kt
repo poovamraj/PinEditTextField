@@ -11,6 +11,10 @@ import android.util.AttributeSet
 
 class LinePinField : PinField {
 
+    private val cursorTopPadding = Util.dpToPx(5f)
+
+    private val cursorBottomPadding = Util.dpToPx(2f)
+
     constructor(context: Context): super(context)
 
     constructor(context: Context, attr: AttributeSet) : super(context,attr)
@@ -40,7 +44,11 @@ class LinePinField : PinField {
                 canvas?.drawText(character.toString(),textX,textY, textPaint)
             }
 
+            if(isCursorEnabled && hasFocus() && i == text?.length ?: 0){
+                val cursorY1 = paddedY1 - cursorBottomPadding - highLightThickness
+                val cursorY2 = cursorTopPadding
+                drawCursor(canvas,textX ,cursorY1,cursorY2,highlightPaint)
+            }
         }
-
     }
 }
