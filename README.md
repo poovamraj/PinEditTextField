@@ -23,7 +23,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.0.4'
+    implementation 'com.poovam:pin-edittext-field:1.0.5'
 }
 ```
 
@@ -43,6 +43,7 @@ dependencies {
         app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all types of Pin Fields)
         app:lineThickness="5dp" // line thickness can be provided (applicable to all types of Pin Fields)                                              
         app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields)
+        app:isCursorEnabled="true" // to be set to true if cursor is needed (applicable to only Square and Line Pin Fields)                                     
         android:background="@color/colorPrimary"
         android:id="@+id/lineField"/>
 
