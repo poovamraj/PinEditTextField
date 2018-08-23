@@ -23,7 +23,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.0.5'
+    implementation 'com.poovam:pin-edittext-field:1.0.6'
 }
 ```
 
@@ -43,7 +43,8 @@ dependencies {
         app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all types of Pin Fields)
         app:lineThickness="5dp" // line thickness can be provided (applicable to all types of Pin Fields)                                              
         app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields)
-        app:isCursorEnabled="true" // to be set to true if cursor is needed (applicable to only Square and Line Pin Fields)                                     
+        app:isCursorEnabled="true" // to be set to true if cursor is needed (applicable to only Square and Line Pin Fields)   
+        app:highlightSingleFieldMode="true" // Only the active field is highlighted (use app:fillerColor for Circle Pin Field)
         android:background="@color/colorPrimary"
         android:id="@+id/lineField"/>
 
@@ -90,6 +91,7 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 - Use any type of keyboard you would like for the View.
 - Customize the distance between your Pin Fields.
 - Enable or disable cursor to your Pin Fields.
+- Highlight only the currently active Field or the whole Pin Field
 
 License
 =======
