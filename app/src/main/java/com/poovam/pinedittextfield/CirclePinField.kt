@@ -62,7 +62,7 @@ class CirclePinField: PinField{
             val x1 = (i*singleFieldWidth)
             val character:Char? = text?.getOrNull(i)
 
-            if(isHighlightEnabled && hasFocus()){
+            if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
                 canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp, highlightPaint)
             }else{
                 canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp, fieldPaint)
@@ -70,6 +70,12 @@ class CirclePinField: PinField{
 
             if(character!=null) {
                 canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),(circleRadiusDp/2)-highLightThickness, fillerPaint)
+            }
+
+            if(hasFocus() && i == text?.length ?: 0){
+                if(isHighlightEnabled && highlightSingleFieldMode){
+                    canvas?.drawCircle(x1+(singleFieldWidth/2).toFloat(),(height/2).toFloat(),circleRadiusDp, highlightPaint)
+                }
             }
         }
     }
