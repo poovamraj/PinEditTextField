@@ -43,8 +43,8 @@ dependencies {
         app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all types of Pin Fields)
         app:lineThickness="5dp" // line thickness can be provided (applicable to all types of Pin Fields)                                              
         app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields)
+        app:highlightSingleFieldMode="true" // Only the active field is highlighted (applicable to all types of Pin Fields)
         app:isCursorEnabled="true" // to be set to true if cursor is needed (applicable to only Square and Line Pin Fields)   
-        app:highlightSingleFieldMode="true" // Only the active field is highlighted (use app:fillerColor for Circle Pin Field)
         android:background="@color/colorPrimary"
         android:id="@+id/lineField"/>
 
