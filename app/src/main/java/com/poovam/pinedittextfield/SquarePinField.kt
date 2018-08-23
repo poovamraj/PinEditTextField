@@ -36,7 +36,7 @@ class SquarePinField : PinField{
             val textY = ((paddedY2-paddedY1)/2+paddedY1)+ lineThickness +(textPaint.textSize/4)
             val character:Char? = text?.getOrNull(i)
 
-            if(isHighlightEnabled && hasFocus()){
+            if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
                 canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
             }else{
                 canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, fieldPaint)
@@ -46,11 +46,16 @@ class SquarePinField : PinField{
                 canvas?.drawText(character.toString(),textX,textY, textPaint)
             }
 
-            if(isCursorEnabled && hasFocus() && i == text?.length ?: 0){
-                val cursorPadding = cursorPadding + highLightThickness
-                val cursorY1 = paddedY1 + cursorPadding
-                val cursorY2 = paddedY2 - cursorPadding
-                drawCursor(canvas,textX,cursorY1,cursorY2,highlightPaint)
+            if(hasFocus() && i == text?.length ?: 0){
+                if(isCursorEnabled){
+                    val cursorPadding = cursorPadding + highLightThickness
+                    val cursorY1 = paddedY1 + cursorPadding
+                    val cursorY2 = paddedY2 - cursorPadding
+                    drawCursor(canvas,textX,cursorY1,cursorY2,highlightPaint)
+                }
+                if(isHighlightEnabled && highlightSingleFieldMode){
+                    canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
+                }
             }
         }
     }

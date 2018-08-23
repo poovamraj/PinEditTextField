@@ -34,7 +34,7 @@ class LinePinField : PinField {
             val textY = (paddedY1- lineThickness)-(textPaint.textSize/4)
             val character:Char? = text?.getOrNull(i)
 
-            if(isHighlightEnabled && hasFocus()){
+            if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
                 canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)
             }else{
                 canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, fieldPaint)
@@ -44,10 +44,15 @@ class LinePinField : PinField {
                 canvas?.drawText(character.toString(),textX,textY, textPaint)
             }
 
-            if(isCursorEnabled && hasFocus() && i == text?.length ?: 0){
-                val cursorY1 = paddedY1 - cursorBottomPadding - highLightThickness
-                val cursorY2 = cursorTopPadding
-                drawCursor(canvas,textX ,cursorY1,cursorY2,highlightPaint)
+            if(hasFocus() && i == text?.length ?: 0){
+                if(isCursorEnabled){
+                    val cursorY1 = paddedY1 - cursorBottomPadding - highLightThickness
+                    val cursorY2 = cursorTopPadding
+                    drawCursor(canvas,textX ,cursorY1,cursorY2,highlightPaint)
+                }
+                if(isHighlightEnabled && highlightSingleFieldMode){
+                    canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)
+                }
             }
         }
     }

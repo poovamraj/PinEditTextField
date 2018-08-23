@@ -76,6 +76,8 @@ open class PinField : AppCompatEditText {
 
     protected var isHighlightEnabled = true
 
+    protected var highlightSingleFieldMode = true
+
     private var lastCursorChangeState: Long = -1
 
     private var cursorCurrentVisible = true
@@ -140,6 +142,7 @@ open class PinField : AppCompatEditText {
             isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled,isHighlightEnabled)
             isCustomBackground = a.getBoolean(R.styleable.PinField_isCustomBackground,false)
             isCursorEnabled = a.getBoolean(R.styleable.PinField_isCursorEnabled,false)
+            highlightSingleFieldMode = a.getBoolean(R.styleable.PinField_highlightSingleFieldMode,false)
         } finally {
             a.recycle()
         }
