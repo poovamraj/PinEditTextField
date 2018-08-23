@@ -23,6 +23,7 @@
         app:fieldColor="@color/colorPrimary"
         app:highlightColor="@color/colorAccent"
         app:isCursorEnabled="true"
+        app:highlightSingleFieldMode="true"
         android:id="@+id/squareField"
         android:layout_marginTop="15dp"/>
 
@@ -33,6 +34,7 @@
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
         app:isCursorEnabled="true"
+        app:highlightSingleFieldMode="true"
         android:id="@+id/lineField"
         android:layout_marginTop="10dp"/>
 
