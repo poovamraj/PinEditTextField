@@ -206,9 +206,11 @@ open class PinField : AppCompatEditText {
     override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter)
         if (text != null && text.length == numberOfFields){
-            onTextCompleteListener?.onTextComplete(text.toString())
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(windowToken, 0)
+            val shouldCloseKeyboard = onTextCompleteListener?.onTextComplete(text.toString()) ?: false
+            if(shouldCloseKeyboard){
+                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(windowToken, 0)
+            }
         }
     }
 
@@ -230,6 +232,6 @@ open class PinField : AppCompatEditText {
     }
 
     interface OnTextCompleteListener {
-        fun onTextComplete(enteredText: String)
+        fun onTextComplete(enteredText: String): Boolean
     }
 }
