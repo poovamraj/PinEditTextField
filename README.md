@@ -23,7 +23,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.0.7'
+    implementation 'com.poovam:pin-edittext-field:1.0.8'
 }
 ```
 
@@ -76,8 +76,9 @@ dependencies {
 final LinePinField linePinField = findViewById(R.id.lineField);
 linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
     @Override
-    public void onTextComplete(@NotNull String enteredText) {
+    public boolean onTextComplete (@NotNull String enteredText) {
         Toast.makeText(MainActivity.this,enteredText,Toast.LENGTH_SHORT).show();
+        return true; // Return true to keep the keyboard open else return false to close the keyboard
     }
 });
 ```
@@ -91,7 +92,8 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 - Use any type of keyboard you would like for the View.
 - Customize the distance between your Pin Fields.
 - Enable or disable cursor to your Pin Fields.
-- Highlight only the currently active Field or the whole Pin Field
+- Highlight only the currently active Field or the whole Pin Field.
+- Keep the keyboard open or closed after the Text is entered.
 
 License
 =======
