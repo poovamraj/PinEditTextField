@@ -16,7 +16,7 @@ class SampleActivity : AppCompatActivity() {
         val listener = object : PinField.OnTextCompleteListener{
             override fun onTextComplete(enteredText: String): Boolean {
                 Toast.makeText(this@SampleActivity,enteredText, Toast.LENGTH_SHORT).show()
-                return@onTextComplete false
+                return@onTextComplete true
             }
 
         }
