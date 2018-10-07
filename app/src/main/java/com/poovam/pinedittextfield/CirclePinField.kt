@@ -55,11 +55,18 @@ class CirclePinField: PinField{
         fillerPaint.strokeWidth = circleRadiusDp
     }
 
+    override fun getDefaultDistanceInBetween(): Float{
+        return (singleFieldWidth - (circleRadiusDp*2))*2
+    }
+
     override fun onDraw(canvas: Canvas?) {
 
         for (i in 0 until numberOfFields){
 
-            val x1 = (i*singleFieldWidth)
+            val padding = (if (distanceInBetween!= defDistanceInBetweenValue) distanceInBetween else getDefaultDistanceInBetween())/2
+
+            val x1 = (padding+(circleRadiusDp*2))*i
+
             val character:Char? = text?.getOrNull(i)
 
             if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){

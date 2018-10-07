@@ -193,7 +193,7 @@ open class PinField : AppCompatEditText {
         return true
     }
 
-    protected fun getDefaultDistanceInBetween(): Float{
+    open protected fun getDefaultDistanceInBetween(): Float{
         return (singleFieldWidth/(numberOfFields-1)).toFloat()
     }
 
