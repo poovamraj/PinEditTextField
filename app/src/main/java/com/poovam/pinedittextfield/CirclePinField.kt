@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
+import android.view.View
 
 /**
  * Created by poovam-5255 on 5/23/2018.
@@ -46,6 +47,7 @@ class CirclePinField: PinField{
         try {
             circleRadiusDp = a.getDimension(R.styleable.CirclePinField_circleRadius, circleRadiusDp)
             fillerColor = a.getColor(R.styleable.CirclePinField_fillerColor, fillerColor)
+            if(distanceInBetween == DEFAULT_DISTANCE_IN_BETWEEN) distanceInBetween = Util.dpToPx(50f)
         } finally {
             a.recycle()
         }
@@ -63,7 +65,7 @@ class CirclePinField: PinField{
 
         for (i in 0 until numberOfFields){
 
-            val padding = (if (distanceInBetween!= defDistanceInBetweenValue) distanceInBetween else getDefaultDistanceInBetween())/2
+            val padding = (if (distanceInBetween!= DEFAULT_DISTANCE_IN_BETWEEN) distanceInBetween else getDefaultDistanceInBetween())/2
 
             val x1 = (padding+(circleRadiusDp*2))*i
 

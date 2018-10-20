@@ -20,9 +20,11 @@ open class PinField : AppCompatEditText {
 
     private val defaultWidth = Util.dpToPx(60f).toInt()
 
-    protected val defDistanceInBetweenValue = -1f
+    companion object {
+        val DEFAULT_DISTANCE_IN_BETWEEN = -1f
+    }
 
-    protected var distanceInBetween:Float = defDistanceInBetweenValue
+    protected var distanceInBetween:Float = DEFAULT_DISTANCE_IN_BETWEEN
         set(value) {
             field = value
             requestLayout()
@@ -136,7 +138,7 @@ open class PinField : AppCompatEditText {
         try {
             numberOfFields = a.getInt(R.styleable.PinField_noOfFields, numberOfFields)
             lineThickness = a.getDimension(R.styleable.PinField_lineThickness, lineThickness)
-            distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, defDistanceInBetweenValue)
+            distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, DEFAULT_DISTANCE_IN_BETWEEN)
             fieldColor = a.getColor(R.styleable.PinField_fieldColor,fieldColor)
             highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor,highlightPaintColor)
             isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled,isHighlightEnabled)

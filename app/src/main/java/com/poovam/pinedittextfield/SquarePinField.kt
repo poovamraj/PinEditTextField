@@ -26,7 +26,7 @@ class SquarePinField : PinField{
         for (i in 0 until numberOfFields){
 
             val x1 = (i*singleFieldWidth)
-            val padding = (if (distanceInBetween!= defDistanceInBetweenValue) distanceInBetween else getDefaultDistanceInBetween())/2
+            val padding = (if (distanceInBetween!= DEFAULT_DISTANCE_IN_BETWEEN) distanceInBetween else getDefaultDistanceInBetween())/2
             val paddedX1 = (x1 + padding)
             val paddedX2 = ((x1+singleFieldWidth)-padding)
             val squareHeight = paddedX2-paddedX1
