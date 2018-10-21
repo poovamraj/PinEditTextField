@@ -2,6 +2,8 @@ package com.poovam.pinedittextfield
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
+import android.os.Build
 import android.util.AttributeSet
 
 /**
@@ -12,14 +14,32 @@ import android.util.AttributeSet
 
 class SquarePinField : PinField{
 
+    private var cornerRadius = 0f
+    set(value) {
+        field = value
+        invalidate()
+    }
+
     private val cursorPadding = Util.dpToPx(5f)
 
     constructor(context: Context): super(context)
 
-    constructor(context: Context, attr: AttributeSet) : super(context,attr)
+    constructor(context: Context, attr: AttributeSet) : super(context,attr){
+        initParams(attr)
+    }
 
-    constructor(context: Context, attr: AttributeSet, defStyle: Int) : super(context,attr,defStyle)
+    constructor(context: Context, attr: AttributeSet, defStyle: Int) : super(context,attr,defStyle){
+        initParams(attr)
+    }
 
+    private fun initParams(attr: AttributeSet){
+        val a = context.theme.obtainStyledAttributes(attr, R.styleable.SquarePinField, 0,0)
+        try {
+            cornerRadius = a.getDimension(R.styleable.SquarePinField_cornerRadius, cornerRadius)
+        } finally {
+            a.recycle()
+        }
+    }
 
     override fun onDraw(canvas: Canvas?) {
 
@@ -37,9 +57,9 @@ class SquarePinField : PinField{
             val character:Char? = text?.getOrNull(i)
 
             if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
-                canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
+                drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
             }else{
-                canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, fieldPaint)
+                drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, fieldPaint)
             }
 
             if(character!=null) {
@@ -54,9 +74,17 @@ class SquarePinField : PinField{
                     drawCursor(canvas,textX,cursorY1,cursorY2,highlightPaint)
                 }
                 if(isHighlightEnabled && highlightSingleFieldMode){
-                    canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
+                    drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
                 }
             }
+        }
+    }
+
+    private fun drawRect(canvas: Canvas?,paddedX1:Float,paddedY1:Float,paddedX2:Float,paddedY2:Float,paint: Paint){
+        if(cornerRadius>0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            canvas?.drawRoundRect(paddedX1,paddedY1,paddedX2,paddedY2,cornerRadius,cornerRadius, paint)
+        }else{
+            canvas?.drawRect(paddedX1,paddedY1,paddedX2,paddedY2, paint)
         }
     }
 }
