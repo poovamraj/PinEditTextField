@@ -55,7 +55,7 @@ open class PinField : AppCompatEditText {
             invalidate()
         }
 
-    var highlightPaintColor = ContextCompat.getColor(context,R.color.accent)
+    var highlightPaintColor = ContextCompat.getColor(context,R.color.pinFieldLibraryAccent)
         set(value){
             field = value
             highlightPaint.color = field
@@ -89,7 +89,7 @@ open class PinField : AppCompatEditText {
     var isCustomBackground = false
     set(value) {
         if(!value){
-            setBackgroundResource(R.color.transparent)
+            setBackgroundResource(R.color.pinFieldLibraryTransparent)
         }
         field = value
     }
@@ -151,36 +151,35 @@ open class PinField : AppCompatEditText {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val width = getViewWidth(defaultWidth * numberOfFields,widthMeasureSpec)
+        singleFieldWidth = width/numberOfFields
+        setMeasuredDimension(width, getViewHeight(singleFieldWidth,heightMeasureSpec))
+    }
 
-        val desiredWidth = (defaultWidth * numberOfFields)
+    open protected fun getViewWidth(desiredWidth:Int, widthMeasureSpec: Int): Int{
         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
         val widthSize = View.MeasureSpec.getSize(widthMeasureSpec)
-        val width: Int
 
         //Measure Width
-        width = when (widthMode) {
-            View.MeasureSpec.EXACTLY -> widthSize
-            View.MeasureSpec.AT_MOST -> Math.min(desiredWidth, widthSize)
-            View.MeasureSpec.UNSPECIFIED -> desiredWidth
+        return when (widthMode) {
+            MeasureSpec.EXACTLY -> widthSize
+            MeasureSpec.AT_MOST -> Math.min(desiredWidth, widthSize)
+            MeasureSpec.UNSPECIFIED -> desiredWidth
             else -> desiredWidth
         }
-        singleFieldWidth = width/numberOfFields
+    }
 
-
-        val desiredHeight = singleFieldWidth
+    open protected fun getViewHeight(desiredHeight: Int, heightMeasureSpec: Int): Int{
         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
         val heightSize = View.MeasureSpec.getSize(heightMeasureSpec)
-        val height: Int
 
         //Measure Height
-        height = when (heightMode) {
+        return when (heightMode) {
             View.MeasureSpec.EXACTLY -> heightSize
             View.MeasureSpec.AT_MOST -> Math.min(desiredHeight, heightSize)
             View.MeasureSpec.UNSPECIFIED -> desiredHeight
             else -> desiredHeight
         }
-
-        setMeasuredDimension(width, height)
     }
 
     override fun onSelectionChanged(selStart: Int, selEnd: Int) {
