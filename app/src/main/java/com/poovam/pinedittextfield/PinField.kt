@@ -233,6 +233,9 @@ open class PinField : AppCompatEditText {
     }
 
     interface OnTextCompleteListener {
+        /**
+         * @return return true if keyboard should be closed after text is entered
+         */
         fun onTextComplete(enteredText: String): Boolean
     }
 }
