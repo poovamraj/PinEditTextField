@@ -102,7 +102,7 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 
 ## Example
 
-![PinEntryEditText](https://ibin.co/4KXfqA8uEGdQ.jpg)
+![PinEntryEditText](https://ibin.co/4KY3vBnVXxtc.jpg)
 
 License
 =======
