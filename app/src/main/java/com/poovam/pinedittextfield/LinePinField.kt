@@ -48,7 +48,7 @@ class LinePinField : PinField {
             val paddedY1 = height - yPadding
             val textX = ((paddedX2-paddedX1)/2)+paddedX1
             val textY = (paddedY1- lineThickness)-(textPaint.textSize/4)-bottomTextPaddingDp
-            val character:Char? = text?.getOrNull(i)
+            val character:Char? = transformationMethod?.getTransformation(text,this)?.getOrNull(i) ?: text.getOrNull(i)
 
             if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
                 canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)

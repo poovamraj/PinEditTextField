@@ -10,7 +10,6 @@
         <attr name="isCustomBackground" format="boolean" />
         <attr name="isCursorEnabled" format="boolean" />
         <attr name="highlightSingleFieldMode" format="boolean" />
-        <attr name="passwordMaskCharacter" format="string" />
     </declare-styleable>
 
     <declare-styleable name="LinePinField">
