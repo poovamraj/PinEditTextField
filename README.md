@@ -23,7 +23,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.0.8'
+    implementation 'com.poovam:pin-edittext-field:1.1.0'
 }
 ```
 
@@ -44,7 +44,8 @@ dependencies {
         app:lineThickness="5dp" // line thickness can be provided (applicable to all types of Pin Fields)                                              
         app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields)
         app:highlightSingleFieldMode="true" // only the active field is highlighted (applicable to all types of Pin Fields)
-        app:isCursorEnabled="true" // to be set to true if cursor is needed (applicable to only Square and Line Pin Fields)   
+        app:isCursorEnabled="true" // to be set to true if cursor is needed (applicable to only Square and Line Pin Fields)
+        app:bottomTextPaddingDp="15dp" // distance between line and the text (applicable only for Line Pin Fields)
         android:background="@color/colorPrimary"
         android:id="@+id/lineField"/>
 
@@ -53,6 +54,7 @@ dependencies {
         android:layout_height="wrap_content"
         android:inputType="text"
         android:textSize="16sp"
+        app:cornerRadius="10dp" // Will make the square curved on the edges (applicable only for Square Pin Fields)
         app:noOfFields="4"                                                
         android:textSelectHandle="@drawable/text_handle" // recommended
         android:id="@+id/squareField"
@@ -94,6 +96,13 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 - Enable or disable cursor to your Pin Fields.
 - Highlight only the currently active Field or the whole Pin Field.
 - Keep the keyboard open or closed after the Text is entered.
+- Curve the edges in your Square Pin Field view.
+- Set custom distance between your line and text Line Pin Field.
+- Mask your passwords properly.
+
+## Example
+
+![PinEntryEditText](https://ibin.co/4KXfqA8uEGdQ.jpg)
 
 License
 =======
