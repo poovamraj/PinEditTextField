@@ -13,6 +13,10 @@
         <attr name="passwordMaskCharacter" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="LinePinField">
+        <attr name="bottomTextPaddingDp" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="SquarePinField">
         <attr name="cornerRadius" format="dimension" />
     </declare-styleable>
