@@ -12,6 +12,14 @@
         <attr name="highlightSingleFieldMode" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="LinePinField">
+        <attr name="bottomTextPaddingDp" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SquarePinField">
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="CirclePinField">
         <attr name="circleRadius" format="dimension" />
         <attr name="fillerColor" format="color" />

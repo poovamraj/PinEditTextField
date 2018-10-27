@@ -20,9 +20,11 @@ open class PinField : AppCompatEditText {
 
     private val defaultWidth = Util.dpToPx(60f).toInt()
 
-    protected val defDistanceInBetweenValue = -1f
+    companion object {
+        val DEFAULT_DISTANCE_IN_BETWEEN = -1f
+    }
 
-    protected var distanceInBetween:Float = defDistanceInBetweenValue
+    protected var distanceInBetween:Float = DEFAULT_DISTANCE_IN_BETWEEN
         set(value) {
             field = value
             requestLayout()
@@ -53,7 +55,7 @@ open class PinField : AppCompatEditText {
             invalidate()
         }
 
-    var highlightPaintColor = ContextCompat.getColor(context,R.color.accent)
+    var highlightPaintColor = ContextCompat.getColor(context,R.color.pinFieldLibraryAccent)
         set(value){
             field = value
             highlightPaint.color = field
@@ -87,7 +89,7 @@ open class PinField : AppCompatEditText {
     var isCustomBackground = false
     set(value) {
         if(!value){
-            setBackgroundResource(R.color.transparent)
+            setBackgroundResource(R.color.pinFieldLibraryTransparent)
         }
         field = value
     }
@@ -136,7 +138,7 @@ open class PinField : AppCompatEditText {
         try {
             numberOfFields = a.getInt(R.styleable.PinField_noOfFields, numberOfFields)
             lineThickness = a.getDimension(R.styleable.PinField_lineThickness, lineThickness)
-            distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, defDistanceInBetweenValue)
+            distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, DEFAULT_DISTANCE_IN_BETWEEN)
             fieldColor = a.getColor(R.styleable.PinField_fieldColor,fieldColor)
             highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor,highlightPaintColor)
             isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled,isHighlightEnabled)
@@ -149,36 +151,35 @@ open class PinField : AppCompatEditText {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val width = getViewWidth(defaultWidth * numberOfFields,widthMeasureSpec)
+        singleFieldWidth = width/numberOfFields
+        setMeasuredDimension(width, getViewHeight(singleFieldWidth,heightMeasureSpec))
+    }
 
-        val desiredWidth = (defaultWidth * numberOfFields)
+    open protected fun getViewWidth(desiredWidth:Int, widthMeasureSpec: Int): Int{
         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
         val widthSize = View.MeasureSpec.getSize(widthMeasureSpec)
-        val width: Int
 
         //Measure Width
-        width = when (widthMode) {
-            View.MeasureSpec.EXACTLY -> widthSize
-            View.MeasureSpec.AT_MOST -> Math.min(desiredWidth, widthSize)
-            View.MeasureSpec.UNSPECIFIED -> desiredWidth
+        return when (widthMode) {
+            MeasureSpec.EXACTLY -> widthSize
+            MeasureSpec.AT_MOST -> Math.min(desiredWidth, widthSize)
+            MeasureSpec.UNSPECIFIED -> desiredWidth
             else -> desiredWidth
         }
-        singleFieldWidth = width/numberOfFields
+    }
 
-
-        val desiredHeight = singleFieldWidth
+    open protected fun getViewHeight(desiredHeight: Int, heightMeasureSpec: Int): Int{
         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
         val heightSize = View.MeasureSpec.getSize(heightMeasureSpec)
-        val height: Int
 
         //Measure Height
-        height = when (heightMode) {
+        return when (heightMode) {
             View.MeasureSpec.EXACTLY -> heightSize
             View.MeasureSpec.AT_MOST -> Math.min(desiredHeight, heightSize)
             View.MeasureSpec.UNSPECIFIED -> desiredHeight
             else -> desiredHeight
         }
-
-        setMeasuredDimension(width, height)
     }
 
     override fun onSelectionChanged(selStart: Int, selEnd: Int) {
@@ -232,6 +233,9 @@ open class PinField : AppCompatEditText {
     }
 
     interface OnTextCompleteListener {
+        /**
+         * @return return true if keyboard should be closed after text is entered
+         */
         fun onTextComplete(enteredText: String): Boolean
     }
 }

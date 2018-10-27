@@ -25,6 +25,7 @@
         app:isCursorEnabled="true"
         app:highlightSingleFieldMode="true"
         android:id="@+id/squareField"
+        app:cornerRadius="10dp"
         android:layout_marginTop="15dp"/>
 
     <com.poovam.pinedittextfield.LinePinField
