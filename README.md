@@ -67,7 +67,8 @@ dependencies {
         app:noOfFields="4"                                                
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle" // recommended
-        app:circleRadius="15dp" // radius of the circle  (applicable only to Circle Pin Field)                                               
+        app:circleRadius="15dp" // radius of the circle  (applicable only to Circle Pin Field)                         
+        app:fillerRadius="2dp" // radius of the inside circle shown when text is entered (applicable only to Circle Pin Field)  
         app:fillerColor="@color/colorPrimary" // color that can be provided inside circle  (applicable only to Circle Pin Field)
         android:id="@+id/circleField"/>
 ```
