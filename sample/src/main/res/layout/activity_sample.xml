@@ -46,6 +46,7 @@
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
         app:circleRadius="15dp"
+        app:fillerRadius="2dp"
         android:id="@+id/circleField"
         android:layout_marginTop="35dp"/>
 </LinearLayout>
