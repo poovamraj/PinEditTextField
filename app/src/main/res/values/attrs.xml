@@ -23,5 +23,6 @@
     <declare-styleable name="CirclePinField">
         <attr name="circleRadius" format="dimension" />
         <attr name="fillerColor" format="color" />
+        <attr name="fillerRadius" format="dimension"/>
     </declare-styleable>
 </resources>

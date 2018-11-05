@@ -16,10 +16,20 @@ import android.view.ViewGroup
  */
 class CirclePinField: PinField{
 
+    companion object {
+        private val DEFAULT_FILLER_RADIUS = -1f
+    }
+
     var fillerColor =  ContextCompat.getColor(context,R.color.pinFieldLibraryAccent)
         set(value){
             field = value
             fillerPaint.color = fillerColor
+            invalidate()
+        }
+
+    var fillerRadius = DEFAULT_FILLER_RADIUS
+        set(value){
+            field = value
             invalidate()
         }
 
@@ -48,6 +58,7 @@ class CirclePinField: PinField{
         try {
             circleRadiusDp = a.getDimension(R.styleable.CirclePinField_circleRadius, circleRadiusDp)
             fillerColor = a.getColor(R.styleable.CirclePinField_fillerColor, fillerColor)
+            fillerRadius = a.getDimension(R.styleable.CirclePinField_fillerRadius,fillerRadius)
             if(distanceInBetween == DEFAULT_DISTANCE_IN_BETWEEN) distanceInBetween = Util.dpToPx(30f)
         } finally {
             a.recycle()
@@ -110,7 +121,8 @@ class CirclePinField: PinField{
             }
 
             if(character!=null) {
-                canvas?.drawCircle(x1,y1,(circleRadiusDp/2)-highLightThickness, fillerPaint)
+                val tempFillerRadius = if(this.fillerRadius == DEFAULT_FILLER_RADIUS)(circleRadiusDp/2)-highLightThickness else this.fillerRadius/2
+                canvas?.drawCircle(x1,y1,tempFillerRadius, fillerPaint)
             }
 
             if(hasFocus() && i == text?.length ?: 0){
