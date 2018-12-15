@@ -23,7 +23,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.1.0'
+    implementation 'com.poovam:pin-edittext-field:1.1.2'
 }
 ```
 
@@ -100,6 +100,7 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 - Curve the edges in your Square Pin Field view.
 - Set custom distance between your line and text Line Pin Field.
 - Mask your passwords properly.
+- Support for showing hint in your Pin Fields
 
 ## Example
 
