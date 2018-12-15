@@ -24,6 +24,7 @@
         app:highlightColor="@color/colorAccent"
         app:isCursorEnabled="true"
         app:highlightSingleFieldMode="true"
+        android:hint="****"
         android:id="@+id/squareField"
         app:cornerRadius="10dp"
         android:layout_marginTop="15dp"/>
@@ -35,6 +36,7 @@
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
         app:isCursorEnabled="true"
+        android:hint="Type your pin here"
         app:highlightSingleFieldMode="true"
         android:id="@+id/lineField"
         android:layout_marginTop="10dp"/>
