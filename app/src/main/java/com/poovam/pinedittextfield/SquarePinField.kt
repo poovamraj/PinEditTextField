@@ -66,6 +66,13 @@ class SquarePinField : PinField{
                 canvas?.drawText(character.toString(),textX,textY, textPaint)
             }
 
+            if(shouldDrawHint()){
+                val hintChar = hint.getOrNull(i)
+                if(hintChar != null){
+                    canvas?.drawText(hintChar.toString(),textX,textY, hintPaint)
+                }
+            }
+
             if(hasFocus() && i == text?.length ?: 0){
                 if(isCursorEnabled){
                     val cursorPadding = cursorPadding + highLightThickness

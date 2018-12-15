@@ -2,7 +2,10 @@ package com.poovam.pinedittextfield
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.util.AttributeSet
+
+
 
 /**
  * Created by poovam-5255 on 5/23/2018.
@@ -39,6 +42,7 @@ class LinePinField : PinField {
 
     override fun onDraw(canvas: Canvas?) {
 
+        var hintY = 0f
         for (i in 0 until numberOfFields){
 
             val x1 = (i*singleFieldWidth)
@@ -48,6 +52,7 @@ class LinePinField : PinField {
             val paddedY1 = height - yPadding
             val textX = ((paddedX2-paddedX1)/2)+paddedX1
             val textY = (paddedY1- lineThickness)-(textPaint.textSize/4)-bottomTextPaddingDp
+            hintY = textY
             val character:Char? = transformationMethod?.getTransformation(text,this)?.getOrNull(i) ?: text.getOrNull(i)
 
             if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
@@ -70,6 +75,11 @@ class LinePinField : PinField {
                     canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)
                 }
             }
+        }
+
+        if(shouldDrawHint()){
+            hintPaint.textAlign = Paint.Align.CENTER
+            canvas?.drawText(hint.toString(),(canvas.width/2).toFloat(),(canvas.height/2).toFloat(), hintPaint)
         }
     }
 }

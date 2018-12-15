@@ -11,7 +11,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 
-
 /**
  * Created by poovam-5255 on 3/3/2018.
  * View where all the magic happens
@@ -21,10 +20,10 @@ open class PinField : AppCompatEditText {
     private val defaultWidth = Util.dpToPx(60f).toInt()
 
     companion object {
-        val DEFAULT_DISTANCE_IN_BETWEEN = -1f
+        const val DEFAULT_DISTANCE_IN_BETWEEN = -1f
     }
 
-    protected var distanceInBetween:Float = DEFAULT_DISTANCE_IN_BETWEEN
+    protected var distanceInBetween: Float = DEFAULT_DISTANCE_IN_BETWEEN
         set(value) {
             field = value
             requestLayout()
@@ -32,31 +31,31 @@ open class PinField : AppCompatEditText {
         }
 
     var numberOfFields = 4
-    set(value){
-        field = value
-        limitCharsToNoOfFields()
-        invalidate()
-    }
+        set(value) {
+            field = value
+            limitCharsToNoOfFields()
+            invalidate()
+        }
 
     protected var singleFieldWidth = 0
 
     var lineThickness = Util.dpToPx(1.0f)
-        set(value){
+        set(value) {
             field = value
-            fieldPaint.strokeWidth  = field
+            fieldPaint.strokeWidth = field
             highlightPaint.strokeWidth = highLightThickness
             invalidate()
         }
 
-    var fieldColor = ContextCompat.getColor(context,R.color.inactivePinFieldColor)
-        set(value){
+    var fieldColor = ContextCompat.getColor(context, R.color.inactivePinFieldColor)
+        set(value) {
             field = value
             fieldPaint.color = field
             invalidate()
         }
 
-    var highlightPaintColor = ContextCompat.getColor(context,R.color.pinFieldLibraryAccent)
-        set(value){
+    var highlightPaintColor = ContextCompat.getColor(context, R.color.pinFieldLibraryAccent)
+        set(value) {
             field = value
             highlightPaint.color = field
             invalidate()
@@ -71,6 +70,8 @@ open class PinField : AppCompatEditText {
     protected var fieldPaint = Paint()
 
     protected var textPaint = Paint()
+
+    protected var hintPaint = Paint()
 
     protected var highlightPaint = Paint()
 
@@ -87,17 +88,17 @@ open class PinField : AppCompatEditText {
     private val cursorTimeout = 500L
 
     var isCustomBackground = false
-    set(value) {
-        if(!value){
-            setBackgroundResource(R.color.pinFieldLibraryTransparent)
+        set(value) {
+            if (!value) {
+                setBackgroundResource(R.color.pinFieldLibraryTransparent)
+            }
+            field = value
         }
-        field = value
-    }
 
     var highLightThickness = lineThickness
-    get(){
-        return lineThickness + lineThickness*0.7f
-    }
+        get() {
+            return lineThickness + lineThickness * 0.7f
+        }
 
     var onTextCompleteListener: OnTextCompleteListener? = null
 
@@ -117,46 +118,53 @@ open class PinField : AppCompatEditText {
         textPaint.textAlign = Paint.Align.CENTER
         textPaint.style = Paint.Style.FILL
 
+        hintPaint.color = hintTextColors.defaultColor
+        hintPaint.isAntiAlias = true
+        hintPaint.textSize = textSize
+        hintPaint.textAlign = Paint.Align.CENTER
+        hintPaint.style = Paint.Style.FILL
+
         highlightPaint = Paint(fieldPaint)
         highlightPaint.color = highlightPaintColor
-        highlightPaint.strokeWidth =  highLightThickness
+        highlightPaint.strokeWidth = highLightThickness
     }
 
-    constructor(context: Context): super(context)
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attr: AttributeSet) : super(context,attr){
+    constructor(context: Context, attr: AttributeSet) : super(context, attr) {
         initParams(attr)
     }
 
-    constructor(context: Context,attr: AttributeSet,defStyle: Int) : super(context,attr,defStyle){
+    constructor(context: Context, attr: AttributeSet, defStyle: Int) : super(context, attr, defStyle) {
         initParams(attr)
     }
 
-    private fun initParams(attr: AttributeSet){
-        val a = context.theme.obtainStyledAttributes(attr, R.styleable.PinField, 0,0)
+    private fun initParams(attr: AttributeSet) {
+        val a = context.theme.obtainStyledAttributes(attr, R.styleable.PinField, 0, 0)
 
         try {
             numberOfFields = a.getInt(R.styleable.PinField_noOfFields, numberOfFields)
             lineThickness = a.getDimension(R.styleable.PinField_lineThickness, lineThickness)
             distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, DEFAULT_DISTANCE_IN_BETWEEN)
-            fieldColor = a.getColor(R.styleable.PinField_fieldColor,fieldColor)
-            highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor,highlightPaintColor)
-            isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled,isHighlightEnabled)
-            isCustomBackground = a.getBoolean(R.styleable.PinField_isCustomBackground,false)
-            isCursorEnabled = a.getBoolean(R.styleable.PinField_isCursorEnabled,false)
-            highlightSingleFieldMode = a.getBoolean(R.styleable.PinField_highlightSingleFieldMode,false)
+            fieldColor = a.getColor(R.styleable.PinField_fieldColor, fieldColor)
+            highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor, highlightPaintColor)
+            isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled, isHighlightEnabled)
+            isCustomBackground = a.getBoolean(R.styleable.PinField_isCustomBackground, false)
+            isCursorEnabled = a.getBoolean(R.styleable.PinField_isCursorEnabled, false)
+            highlightSingleFieldMode = a.getBoolean(R.styleable.PinField_highlightSingleFieldMode, false)
+            textPaint.typeface = typeface
         } finally {
             a.recycle()
         }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val width = getViewWidth(defaultWidth * numberOfFields,widthMeasureSpec)
-        singleFieldWidth = width/numberOfFields
-        setMeasuredDimension(width, getViewHeight(singleFieldWidth,heightMeasureSpec))
+        val width = getViewWidth(defaultWidth * numberOfFields, widthMeasureSpec)
+        singleFieldWidth = width / numberOfFields
+        setMeasuredDimension(width, getViewHeight(singleFieldWidth, heightMeasureSpec))
     }
 
-    open protected fun getViewWidth(desiredWidth:Int, widthMeasureSpec: Int): Int{
+    protected open fun getViewWidth(desiredWidth: Int, widthMeasureSpec: Int): Int {
         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
         val widthSize = View.MeasureSpec.getSize(widthMeasureSpec)
 
@@ -169,7 +177,7 @@ open class PinField : AppCompatEditText {
         }
     }
 
-    open protected fun getViewHeight(desiredHeight: Int, heightMeasureSpec: Int): Int{
+    protected open fun getViewHeight(desiredHeight: Int, heightMeasureSpec: Int): Int {
         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
         val heightSize = View.MeasureSpec.getSize(heightMeasureSpec)
 
@@ -194,11 +202,11 @@ open class PinField : AppCompatEditText {
         return true
     }
 
-    open protected fun getDefaultDistanceInBetween(): Float{
-        return (singleFieldWidth/(numberOfFields-1)).toFloat()
+    protected open fun getDefaultDistanceInBetween(): Float {
+        return (singleFieldWidth / (numberOfFields - 1)).toFloat()
     }
 
-    private fun limitCharsToNoOfFields(){
+    private fun limitCharsToNoOfFields() {
         val filterArray = arrayOfNulls<InputFilter>(1)
         filterArray[0] = InputFilter.LengthFilter(numberOfFields)
         filters = filterArray
@@ -206,22 +214,28 @@ open class PinField : AppCompatEditText {
 
     override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter)
-        if (text != null && text.length == numberOfFields){
-            val shouldCloseKeyboard = onTextCompleteListener?.onTextComplete(text.toString()) ?: false
-            if(shouldCloseKeyboard){
+        if (text != null && text.length == numberOfFields) {
+            val shouldCloseKeyboard = onTextCompleteListener?.onTextComplete(text.toString())
+                    ?: false
+            if (shouldCloseKeyboard) {
                 val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(windowToken, 0)
             }
         }
     }
 
-    protected fun drawCursor(canvas: Canvas?, x: Float, y1: Float, y2: Float, paint: Paint){
-        if(System.currentTimeMillis() - lastCursorChangeState > 500) {
+    protected fun shouldDrawHint(): Boolean{
+        return (text.isEmpty() || text.isBlank()) &&
+                !isFocused && (hint != null && hint.isNotBlank() && hint.isNotEmpty())
+    }
+
+    protected fun drawCursor(canvas: Canvas?, x: Float, y1: Float, y2: Float, paint: Paint) {
+        if (System.currentTimeMillis() - lastCursorChangeState > 500) {
             cursorCurrentVisible = !cursorCurrentVisible
             lastCursorChangeState = System.currentTimeMillis()
         }
 
-        if(cursorCurrentVisible){
+        if (cursorCurrentVisible) {
             canvas?.drawLine(x, y1, x, y2, paint)
         }
 
