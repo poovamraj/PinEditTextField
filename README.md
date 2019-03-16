@@ -8,6 +8,23 @@ which no other library provides.
 
 ![PinEntryEditText](https://media.giphy.com/media/1rL2WFYucy6AF1Y4L4/giphy.gif)
 
+
+## Features
+
+- Configure 3 different types of Pin Field Views to your app.
+- Allow your users to paste the characters into your Pin Field which no other library provides
+- Support for showing hint in your Pin Fields
+- Customize the number of fields you will be requiring.
+- Highlight in 4 ways - All the fields, Only Current Field, All Completed Fields, None of the fields.
+- Enable or disable cursor to your Pin Fields.
+- Curve the edges in your Square Pin Field view.
+- Customize the distance between your Pin Fields.
+- Set custom distance between your line and text Line Pin Field.
+- Keep the keyboard open or closed after the Text is entered.
+- Mask your passwords properly.
+- Use any type of keyboard you would like for the View.
+- Highly configurable with many attributes for your View.
+
 ## Setup
 
 **Gradle**
@@ -23,7 +40,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.1.2'
+    implementation 'com.poovam:pin-edittext-field:1.2.0'
 }
 ```
 
@@ -34,16 +51,15 @@ dependencies {
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:textSize="16sp"                                              
+        android:textSize="16sp"
+        app:highlightType="allFields" //currentField|completedFields|noFields (applicable to all types of Pin Fields)
         android:textSelectHandle="@drawable/text_handle" // recommended
         app:noOfFields="4"              
         app:distanceInBetween="10dp"  // custom distance can be provided in between fields (applicable to all types of Pin Fields)                                               
         app:fieldColor="@color/colorPrimary"  // custom color can be provided (applicable to all types of Pin Fields)
         app:highlightColor="@color/colorAccent" // custom color can be provided (applicable to all types of Pin Fields)
-        app:highlightEnabled="true" // highlighting can be enabled or disabled (applicable to all types of Pin Fields)
         app:lineThickness="5dp" // line thickness can be provided (applicable to all types of Pin Fields)                                              
         app:isCustomBackground="true" // to be set to true when background is set (applicable to all types of Pin Fields)
-        app:highlightSingleFieldMode="true" // only the active field is highlighted (applicable to all types of Pin Fields)
         app:isCursorEnabled="true" // to be set to true if cursor is needed (applicable to only Square and Line Pin Fields)
         app:bottomTextPaddingDp="15dp" // distance between line and the text (applicable only for Line Pin Fields)
         android:background="@color/colorPrimary"
@@ -85,22 +101,6 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
     }
 });
 ```
-
-## Features
-
-- Allow your users to paste the characters into your Pin Field which no other library provides
-- Configure 3 different types of Pin Field Views to your app.
-- Customize the number of fields you will be requiring.
-- Highly configurable with many attributes for your View.
-- Use any type of keyboard you would like for the View.
-- Customize the distance between your Pin Fields.
-- Enable or disable cursor to your Pin Fields.
-- Highlight only the currently active Field or the whole Pin Field.
-- Keep the keyboard open or closed after the Text is entered.
-- Curve the edges in your Square Pin Field view.
-- Set custom distance between your line and text Line Pin Field.
-- Mask your passwords properly.
-- Support for showing hint in your Pin Fields
 
 ## Example
 
