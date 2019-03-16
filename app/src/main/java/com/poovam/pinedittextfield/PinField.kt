@@ -77,9 +77,7 @@ open class PinField : AppCompatEditText {
 
     protected var yPadding = Util.dpToPx(10f)
 
-    protected var isHighlightEnabled = true
-
-    protected var highlightSingleFieldMode = true
+    protected var highlightSingleFieldType = HighlightType.ALL_FIELDS
 
     private var lastCursorChangeState: Long = -1
 
@@ -148,10 +146,11 @@ open class PinField : AppCompatEditText {
             distanceInBetween = a.getDimension(R.styleable.PinField_distanceInBetween, DEFAULT_DISTANCE_IN_BETWEEN)
             fieldColor = a.getColor(R.styleable.PinField_fieldColor, fieldColor)
             highlightPaintColor = a.getColor(R.styleable.PinField_highlightColor, highlightPaintColor)
-            isHighlightEnabled = a.getBoolean(R.styleable.PinField_highlightEnabled, isHighlightEnabled)
             isCustomBackground = a.getBoolean(R.styleable.PinField_isCustomBackground, false)
             isCursorEnabled = a.getBoolean(R.styleable.PinField_isCursorEnabled, false)
-            highlightSingleFieldMode = a.getBoolean(R.styleable.PinField_highlightSingleFieldMode, false)
+            highlightSingleFieldType = if(a.getBoolean(R.styleable.PinField_highlightEnabled, true))HighlightType.ALL_FIELDS else HighlightType.NO_FIELDS
+            highlightSingleFieldType = if (a.getBoolean(R.styleable.PinField_highlightSingleFieldMode, false)) HighlightType.CURRENT_FIELD else HighlightType.ALL_FIELDS
+            highlightSingleFieldType = HighlightType.getEnum(a.getInt(R.styleable.PinField_highlightType, highlightSingleFieldType.code))
             textPaint.typeface = typeface
         } finally {
             a.recycle()
@@ -224,7 +223,7 @@ open class PinField : AppCompatEditText {
         }
     }
 
-    protected fun shouldDrawHint(): Boolean{
+    protected fun shouldDrawHint(): Boolean {
         return (text.isEmpty() || text.isBlank()) &&
                 !isFocused && (hint != null && hint.isNotBlank() && hint.isNotEmpty())
     }
@@ -246,10 +245,54 @@ open class PinField : AppCompatEditText {
         super.setBackgroundResource(resId)
     }
 
+    protected fun highlightNextField(): Boolean{
+        return highlightSingleFieldType == HighlightType.CURRENT_FIELD
+    }
+
+    protected fun highlightCompletedFields(): Boolean{
+        return highlightSingleFieldType == HighlightType.COMPLETED_FIELDS
+    }
+
+    protected fun highlightAllFields(): Boolean{
+        return highlightSingleFieldType == HighlightType.ALL_FIELDS
+    }
+
+    protected fun highlightNoFields(): Boolean{
+        return highlightSingleFieldType == HighlightType.NO_FIELDS
+    }
+
+    protected fun highlightLogic(currentPosition:Int, textLength: Int?, onHighlight: ()->Unit){
+        if(hasFocus() && !highlightNoFields()){
+            when{
+                highlightNextField() && currentPosition == textLength ?: 0 -> {
+                    onHighlight.invoke()
+                }
+                highlightCompletedFields() && currentPosition < textLength?:0 -> {
+                    onHighlight.invoke()
+                }
+            }
+        }
+    }
+
     interface OnTextCompleteListener {
         /**
          * @return return true if keyboard should be closed after text is entered
          */
         fun onTextComplete(enteredText: String): Boolean
+    }
+}
+
+enum class HighlightType(val code: Int) {
+    ALL_FIELDS(0),CURRENT_FIELD(1), COMPLETED_FIELDS(2), NO_FIELDS(3);
+
+    companion object {
+        fun getEnum(code: Int): HighlightType {
+            for (type in HighlightType.values()) {
+                if (type.code == code) {
+                    return type
+                }
+            }
+            return ALL_FIELDS
+        }
     }
 }

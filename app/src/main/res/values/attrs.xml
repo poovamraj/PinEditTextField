@@ -9,7 +9,14 @@
         <attr name="highlightEnabled" format="boolean" />
         <attr name="isCustomBackground" format="boolean" />
         <attr name="isCursorEnabled" format="boolean" />
+        <!--Single Field Mode is deprecated use highlight type to define how to highlight the fields-->
         <attr name="highlightSingleFieldMode" format="boolean" />
+        <attr name="highlightType" format="enum" >
+            <enum name="allFields" value="0"/>
+            <enum name="currentField" value="1"/>
+            <enum name="completedFields" value="2"/>
+            <enum name="noFields" value="3"/>
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="LinePinField">

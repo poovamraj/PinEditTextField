@@ -56,7 +56,7 @@ class SquarePinField : PinField{
             val textY = ((paddedY2-paddedY1)/2+paddedY1)+ lineThickness +(textPaint.textSize/4)
             val character:Char? = transformationMethod?.getTransformation(text,this)?.getOrNull(i) ?: text.getOrNull(i)
 
-            if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
+            if(highlightAllFields() && hasFocus()){
                 drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
             }else{
                 drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, fieldPaint)
@@ -80,9 +80,9 @@ class SquarePinField : PinField{
                     val cursorY2 = paddedY2 - cursorPadding
                     drawCursor(canvas,textX,cursorY1,cursorY2,highlightPaint)
                 }
-                if(isHighlightEnabled && highlightSingleFieldMode){
-                    drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
-                }
+            }
+            highlightLogic(i, text?.length){
+                drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
             }
         }
     }

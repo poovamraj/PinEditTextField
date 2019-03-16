@@ -22,8 +22,7 @@
         app:distanceInBetween="10dp"
         app:fieldColor="@color/colorPrimary"
         app:highlightColor="@color/colorAccent"
-        app:isCursorEnabled="true"
-        app:highlightSingleFieldMode="true"
+        app:highlightType="currentField"
         android:hint="****"
         android:id="@+id/squareField"
         app:cornerRadius="10dp"
@@ -38,6 +37,8 @@
         app:isCursorEnabled="true"
         android:hint="Type your pin here"
         app:highlightSingleFieldMode="true"
+        app:highlightEnabled="false"
+        app:highlightType="completedFields"
         android:id="@+id/lineField"
         android:layout_marginTop="10dp"/>
 

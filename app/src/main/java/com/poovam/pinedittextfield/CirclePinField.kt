@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 
@@ -94,7 +95,7 @@ class CirclePinField: PinField{
      * this is to make sure when highlighting there is no overlap
      */
     private fun getThickness(): Int{
-        return Math.round(if(isHighlightEnabled)highLightThickness else lineThickness)
+        return Math.round(if(!highlightNoFields())highLightThickness else lineThickness)
     }
 
     private fun getPadding(): Float{
@@ -114,7 +115,7 @@ class CirclePinField: PinField{
 
             val y1 = getViewHeight(height)
 
-            if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
+            if(highlightAllFields() && hasFocus()){
                 canvas?.drawCircle(x1,y1,circleRadiusDp, highlightPaint)
             }else{
                 canvas?.drawCircle(x1,y1,circleRadiusDp, fieldPaint)
@@ -125,10 +126,8 @@ class CirclePinField: PinField{
                 canvas?.drawCircle(x1,y1,tempFillerRadius, fillerPaint)
             }
 
-            if(hasFocus() && i == text?.length ?: 0){
-                if(isHighlightEnabled && highlightSingleFieldMode){
-                    canvas?.drawCircle(x1,y1,circleRadiusDp, highlightPaint)
-                }
+            highlightLogic(i, text?.length){
+                canvas?.drawCircle(x1,y1,circleRadiusDp, highlightPaint)
             }
         }
     }

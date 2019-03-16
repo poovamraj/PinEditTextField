@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 ext {
     PUBLISH_GROUP_ID = 'com.poovam'
     PUBLISH_ARTIFACT_ID = 'pin-edittext-field'
-    PUBLISH_VERSION = '1.1.2'
+    PUBLISH_VERSION = '1.2.0'
 }
 
 android {

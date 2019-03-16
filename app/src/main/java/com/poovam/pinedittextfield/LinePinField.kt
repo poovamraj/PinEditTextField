@@ -55,7 +55,7 @@ class LinePinField : PinField {
             hintY = textY
             val character:Char? = transformationMethod?.getTransformation(text,this)?.getOrNull(i) ?: text.getOrNull(i)
 
-            if(isHighlightEnabled && !highlightSingleFieldMode && hasFocus()){
+            if(highlightAllFields() && hasFocus()){
                 canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)
             }else{
                 canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, fieldPaint)
@@ -71,15 +71,15 @@ class LinePinField : PinField {
                     val cursorY2 = cursorTopPadding
                     drawCursor(canvas,textX ,cursorY1,cursorY2,highlightPaint)
                 }
-                if(isHighlightEnabled && highlightSingleFieldMode){
-                    canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)
-                }
+            }
+            highlightLogic(i, text?.length){
+                canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)
             }
         }
 
         if(shouldDrawHint()){
             hintPaint.textAlign = Paint.Align.CENTER
-            canvas?.drawText(hint.toString(),(canvas.width/2).toFloat(),(canvas.height/2).toFloat(), hintPaint)
+            canvas?.drawText(hint.toString(),(width/2).toFloat(),(height/2).toFloat(), hintPaint)
         }
     }
 }
