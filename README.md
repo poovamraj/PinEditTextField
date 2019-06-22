@@ -1,4 +1,4 @@
-# PinEditTextField for Android
+![PinEditTextField for Android](https://raw.githubusercontent.com/poovamraj/PinEditTextField/master/Logo/PinEditTextField%20_Logo_Horizontal.png)
 
  [ ![Download](https://api.bintray.com/packages/poovamraj/Android-Pin-Field/PinEditTextField/images/download.svg) ](https://bintray.com/poovamraj/Android-Pin-Field/PinEditTextField/_latestVersion)[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-PinEditTextField-green.svg?style=flat )]( https://android-arsenal.com/details/1/7051 )
  
@@ -104,9 +104,8 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 });
 ```
 
-## Example
-
-![PinEntryEditText](https://ibin.co/4KY3vBnVXxtc.jpg)
+## Thank You
+- [chimzycash](https://github.com/chimzycash) - For the amazing logo you contributed!
 
 License
 =======
@@ -122,3 +121,4 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
