@@ -20,10 +20,11 @@
         android:textSelectHandle="@drawable/text_handle"
         app:noOfFields="4"
         app:distanceInBetween="10dp"
+        app:fieldBgColor="#ddd"
         app:fieldColor="@color/colorPrimary"
         app:highlightColor="@color/colorAccent"
         app:highlightType="currentField"
-        android:hint="****"
+        android:text="****"
         android:id="@+id/squareField"
         app:cornerRadius="10dp"
         android:layout_marginTop="15dp"/>
@@ -36,6 +37,7 @@
         android:textSelectHandle="@drawable/text_handle"
         app:isCursorEnabled="true"
         android:hint="Type your pin here"
+        app:fieldColor="@color/colorAccent"
         app:highlightSingleFieldMode="true"
         app:highlightEnabled="false"
         app:highlightType="completedFields"
@@ -46,10 +48,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
+        app:fieldBgColor="#ddd"
         android:textSize="16sp"
+        app:noOfFields="3"
         android:textSelectHandle="@drawable/text_handle"
         app:circleRadius="15dp"
-        app:fillerRadius="2dp"
+        app:fillerRadius="10dp"
         android:id="@+id/circleField"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="15dp"/>
+
+    <com.poovam.pinedittextfield.CirclePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textSize="16sp"
+        app:noOfFields="3"
+        android:textSelectHandle="@drawable/text_handle"
+        app:circleRadius="15dp"
+        app:fillerRadius="10dp"
+        app:fieldColor="@color/colorAccent"
+        android:text="111"
+        android:id="@+id/circleField1"
+        android:layout_marginTop="15dp"/>
+
+    <com.poovam.pinedittextfield.SquarePinField
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textSelectHandle="@drawable/text_handle"
+        app:noOfFields="4"
+        app:distanceInBetween="10dp"
+        app:fieldColor="@color/colorPrimary"
+        app:highlightColor="@color/colorAccent"
+        app:highlightType="currentField"
+        android:hint="hint"
+        android:id="@+id/squareField1"
+        android:layout_marginTop="15dp"/>
 </LinearLayout>
