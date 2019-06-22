@@ -71,6 +71,7 @@ dependencies {
         android:inputType="text"
         android:textSize="16sp"
         app:cornerRadius="10dp" // Will make the square curved on the edges (applicable only for Square Pin Fields)
+        app:fieldBgColor="#ddd" // Will color the background of the field (applicable for Square and Circle Pin Fields)
         app:noOfFields="4"                                                
         android:textSelectHandle="@drawable/text_handle" // recommended
         android:id="@+id/squareField"
@@ -86,6 +87,7 @@ dependencies {
         app:circleRadius="15dp" // radius of the circle  (applicable only to Circle Pin Field)                         
         app:fillerRadius="2dp" // radius of the inside circle shown when text is entered (applicable only to Circle Pin Field)  
         app:fillerColor="@color/colorPrimary" // color that can be provided inside circle  (applicable only to Circle Pin Field)
+        app:fieldBgColor="#ddd" // Will color the background of the field (applicable for Square and Circle Pin Fields)
         android:id="@+id/circleField"/>
 ```
 
