@@ -103,8 +103,11 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
 });
 ```
 
-## Thank You
+
+### Thank You ❤️
 - [chimzycash](https://github.com/chimzycash) - For the amazing logo you contributed!
+
+
 
 License
 =======
