@@ -2,6 +2,7 @@ package com.poovam.pinedittextfield
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatEditText
@@ -100,10 +101,20 @@ open class PinField : AppCompatEditText {
 
     var onTextCompleteListener: OnTextCompleteListener? = null
 
+    var fieldBgColor =  ContextCompat.getColor(context,R.color.pinFieldLibraryAccent)
+        set(value){
+            field = value
+            fieldBgPaint.color = fieldBgColor
+            invalidate()
+        }
+
+    var fieldBgPaint = Paint()
+
     init {
         limitCharsToNoOfFields()
         setWillNotDraw(false)
         maxLines = 1
+        setSingleLine(true)
 
         fieldPaint.color = fieldColor
         fieldPaint.isAntiAlias = true
@@ -125,6 +136,9 @@ open class PinField : AppCompatEditText {
         highlightPaint = Paint(fieldPaint)
         highlightPaint.color = highlightPaintColor
         highlightPaint.strokeWidth = highLightThickness
+
+        fieldBgColor = Color.TRANSPARENT
+        fieldBgPaint.style = Paint.Style.FILL
     }
 
     constructor(context: Context) : super(context)
@@ -151,6 +165,7 @@ open class PinField : AppCompatEditText {
             highlightSingleFieldType = if(a.getBoolean(R.styleable.PinField_highlightEnabled, true))HighlightType.ALL_FIELDS else HighlightType.NO_FIELDS
             highlightSingleFieldType = if (a.getBoolean(R.styleable.PinField_highlightSingleFieldMode, false)) HighlightType.CURRENT_FIELD else HighlightType.ALL_FIELDS
             highlightSingleFieldType = HighlightType.getEnum(a.getInt(R.styleable.PinField_highlightType, highlightSingleFieldType.code))
+            fieldBgColor = a.getColor(R.styleable.PinField_fieldBgColor, fieldBgColor)
             textPaint.typeface = typeface
         } finally {
             a.recycle()

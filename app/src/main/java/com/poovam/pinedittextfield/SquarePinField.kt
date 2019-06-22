@@ -56,6 +56,8 @@ class SquarePinField : PinField{
             val textY = ((paddedY2-paddedY1)/2+paddedY1)+ lineThickness +(textPaint.textSize/4)
             val character:Char? = transformationMethod?.getTransformation(text,this)?.getOrNull(i) ?: text.getOrNull(i)
 
+            drawRect(canvas, paddedX1, paddedY1, paddedX2, paddedY2, fieldBgPaint)
+
             if(highlightAllFields() && hasFocus()){
                 drawRect(canvas,paddedX1,paddedY1,paddedX2,paddedY2, highlightPaint)
             }else{

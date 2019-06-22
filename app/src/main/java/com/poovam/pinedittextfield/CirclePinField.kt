@@ -31,13 +31,21 @@ class CirclePinField: PinField{
     var fillerRadius = DEFAULT_FILLER_RADIUS
         set(value){
             field = value
+            actuallyUsedFillerRadius = field
             invalidate()
+        }
+
+    private var actuallyUsedFillerRadius = fillerRadius
+        set(value){
+            field = if(this.fillerRadius == DEFAULT_FILLER_RADIUS)
+                circleRadiusDp-highLightThickness
+            else
+                this.fillerRadius
         }
 
     var circleRadiusDp = Util.dpToPx(10f)
         set(value){
             field = value
-            fillerPaint.strokeWidth = field
             invalidate()
         }
 
@@ -67,7 +75,7 @@ class CirclePinField: PinField{
     }
 
     init {
-        fillerPaint.strokeWidth = circleRadiusDp
+        fillerPaint.style = Paint.Style.FILL
     }
 
     override fun getViewWidth(desiredWidth:Int, widthMeasureSpec: Int): Int {
@@ -115,6 +123,7 @@ class CirclePinField: PinField{
 
             val y1 = getViewHeight(height)
 
+            canvas?.drawCircle(x1,y1,circleRadiusDp, fieldBgPaint)
             if(highlightAllFields() && hasFocus()){
                 canvas?.drawCircle(x1,y1,circleRadiusDp, highlightPaint)
             }else{
@@ -122,8 +131,7 @@ class CirclePinField: PinField{
             }
 
             if(character!=null) {
-                val tempFillerRadius = if(this.fillerRadius == DEFAULT_FILLER_RADIUS)(circleRadiusDp/2)-highLightThickness else this.fillerRadius/2
-                canvas?.drawCircle(x1,y1,tempFillerRadius, fillerPaint)
+                canvas?.drawCircle(x1,y1,actuallyUsedFillerRadius, fillerPaint)
             }
 
             highlightLogic(i, text?.length){

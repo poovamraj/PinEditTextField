@@ -17,6 +17,7 @@
             <enum name="completedFields" value="2"/>
             <enum name="noFields" value="3"/>
         </attr>
+        <attr name="fieldBgColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="LinePinField">
