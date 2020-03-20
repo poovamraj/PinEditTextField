@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.AppCompatEditText
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
@@ -205,7 +205,7 @@ open class PinField : AppCompatEditText {
     }
 
     override fun onSelectionChanged(selStart: Int, selEnd: Int) {
-        this.setSelection(this.text.length)
+        this.setSelection(this.text!!.length)
     }
 
     final override fun setWillNotDraw(willNotDraw: Boolean) {
@@ -239,7 +239,7 @@ open class PinField : AppCompatEditText {
     }
 
     protected fun shouldDrawHint(): Boolean {
-        return (text.isEmpty() || text.isBlank()) &&
+        return (text!!.isEmpty() || text!!.isBlank()) &&
                 !isFocused && (hint != null && hint.isNotBlank() && hint.isNotEmpty())
     }
 
