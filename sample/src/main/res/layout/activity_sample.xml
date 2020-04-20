@@ -32,7 +32,7 @@
     <com.poovam.pinedittextfield.LinePinField
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:textSize="16sp"
         android:textSelectHandle="@drawable/text_handle"
         app:isCursorEnabled="true"
