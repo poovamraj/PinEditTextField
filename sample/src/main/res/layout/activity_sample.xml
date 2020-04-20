@@ -23,7 +23,7 @@
         app:fieldBgColor="#ddd"
         app:fieldColor="@color/colorPrimary"
         app:highlightColor="@color/colorAccent"
-        app:highlightType="currentField"
+        app:highlightType="allFields"
         android:text="****"
         android:id="@+id/squareField"
         app:cornerRadius="10dp"
