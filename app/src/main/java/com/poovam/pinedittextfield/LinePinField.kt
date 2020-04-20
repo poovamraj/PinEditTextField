@@ -42,7 +42,6 @@ class LinePinField : PinField {
 
     override fun onDraw(canvas: Canvas?) {
 
-        var hintY = 0f
         for (i in 0 until numberOfFields){
 
             val x1 = (i*singleFieldWidth)
@@ -52,8 +51,7 @@ class LinePinField : PinField {
             val paddedY1 = height - yPadding
             val textX = ((paddedX2-paddedX1)/2)+paddedX1
             val textY = (paddedY1- lineThickness)-(textPaint.textSize/4)-bottomTextPaddingDp
-            hintY = textY
-            val character:Char? = transformationMethod?.getTransformation(text,this)?.getOrNull(i) ?: text?.getOrNull(i)
+            val character:Char? = getCharAt(i)
 
             if(highlightAllFields() && hasFocus()){
                 canvas?.drawLine(paddedX1,paddedY1,paddedX2,paddedY1, highlightPaint)

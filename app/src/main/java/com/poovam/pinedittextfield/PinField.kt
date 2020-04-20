@@ -4,12 +4,15 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import androidx.core.content.ContextCompat
-import androidx.appcompat.widget.AppCompatEditText
 import android.text.InputFilter
+import android.text.method.PasswordTransformationMethod
+import android.text.method.TransformationMethod
 import android.util.AttributeSet
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 
 
 /**
@@ -287,6 +290,34 @@ open class PinField : AppCompatEditText {
                 }
             }
         }
+    }
+
+    //There is a issue where android transformation method is not set to password so as a work around
+    //the transformation method used is hardcoded
+    //the check condition used in isPassword() is taken from TextView.java constructor
+    protected fun getCharAt(i: Int): Char?{
+        return getPinFieldTransformation().getTransformation(text,this)?.getOrNull(i) ?: text?.getOrNull(i)
+    }
+
+    private fun getPinFieldTransformation(): TransformationMethod{
+        if(isPassword()){
+            return PasswordTransformationMethod.getInstance();
+        }
+
+        return transformationMethod
+    }
+
+    private fun isPassword(): Boolean{
+        val variation = inputType and (EditorInfo.TYPE_MASK_CLASS or EditorInfo.TYPE_MASK_VARIATION)
+        val passwordInputType = (variation
+                == EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_PASSWORD)
+        val webPasswordInputType = (variation
+                == EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_WEB_PASSWORD)
+        val numberPasswordInputType = (variation
+                == EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_VARIATION_PASSWORD)
+
+        return passwordInputType || webPasswordInputType
+                || numberPasswordInputType
     }
 
     interface OnTextCompleteListener {
