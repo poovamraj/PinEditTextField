@@ -98,7 +98,7 @@ linePinField.setOnTextCompleteListener(new PinField.OnTextCompleteListener() {
     @Override
     public boolean onTextComplete (@NotNull String enteredText) {
         Toast.makeText(MainActivity.this,enteredText,Toast.LENGTH_SHORT).show();
-        return true; // Return true to keep the keyboard open else return false to close the keyboard
+        return true; // Return false to keep the keyboard open else return true to close the keyboard
     }
 });
 ```
