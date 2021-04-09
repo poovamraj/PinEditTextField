@@ -4,11 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-ext {
-    PUBLISH_GROUP_ID = 'com.poovam'
-    PUBLISH_ARTIFACT_ID = 'pin-edittext-field'
-    PUBLISH_VERSION = '1.2.3'
-}
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 29
@@ -41,4 +37,16 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.poovam'
+                artifactId = 'pin-edittext-field'
+                version = '1.2.3'
+            }
+        }
+    }
+}
