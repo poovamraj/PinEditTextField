@@ -210,7 +210,9 @@ open class PinField : AppCompatEditText {
 
     override fun setTextColor(color: Int) {
         super.setTextColor(color)
-        textPaint.color = color
+        textPaint?.let {
+            textPaint.color = color
+        }
     }
 
     override fun setTextColor(colors: ColorStateList?) {
