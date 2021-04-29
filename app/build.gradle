@@ -45,7 +45,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.poovam'
                 artifactId = 'pin-edittext-field'
-                version = '1.2.3'
+                version = '1.2.4'
             }
         }
     }
