@@ -2,6 +2,9 @@
 
  [ ![Download](https://api.bintray.com/packages/poovamraj/Android-Pin-Field/PinEditTextField/images/download.svg) ](https://bintray.com/poovamraj/Android-Pin-Field/PinEditTextField/_latestVersion)[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-PinEditTextField-green.svg?style=flat )]( https://android-arsenal.com/details/1/7051 )
 
+This repository contains `PinEditTextField` that provides Pin Field widget for android with `Paste Functionality`
+which no other library provides.
+
 ## Migrate to Jitpack
 Since Bintray is shutting down, the project is migrated to Jitpack. You can set it up by following this method
 
@@ -23,9 +26,6 @@ dependencies {
     implementation 'com.github.poovamraj:PinEditTextField:1.2.5'
 }
 ```
-
-This repository contains `PinEditTextField` that provides Pin Field widget for android with `Paste Functionality`
-which no other library provides.
 
 
 ![PinEntryEditText](https://media.giphy.com/media/1rL2WFYucy6AF1Y4L4/giphy.gif)&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/poovamraj/PinEditTextField/master/image/Screenshot_1561188408.png" width="270"/>
