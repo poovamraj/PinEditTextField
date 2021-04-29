@@ -10,8 +10,6 @@ Since Bintray is shutting down, the project is migrated to Jitpack. You can set 
 
 **Setup**
 
-**Gradle**
-
 - **Project level `build.gradle`**
 ```gradle
 allprojects {
