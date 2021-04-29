@@ -1,6 +1,7 @@
 package com.poovam.pinedittextfield
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -204,6 +205,23 @@ open class PinField : AppCompatEditText {
             View.MeasureSpec.AT_MOST -> Math.min(desiredHeight, heightSize)
             View.MeasureSpec.UNSPECIFIED -> desiredHeight
             else -> desiredHeight
+        }
+    }
+
+    override fun setTextColor(color: Int) {
+        super.setTextColor(color)
+        textPaint?.let {
+            textPaint.color = color
+        }
+    }
+
+    override fun setTextColor(colors: ColorStateList?) {
+        super.setTextColor(colors)
+        textPaint?.let {
+            textPaint.color =
+                    (colors ?: ColorStateList.valueOf(
+                            ContextCompat.getColor(context, android.R.color.black))
+                            ).defaultColor
         }
     }
 
