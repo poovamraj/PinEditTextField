@@ -27,10 +27,10 @@ dependencies {
 }
 ```
 
+## Features
 
 ![PinEntryEditText](https://media.giphy.com/media/1rL2WFYucy6AF1Y4L4/giphy.gif)&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/poovamraj/PinEditTextField/master/image/Screenshot_1561188408.png" width="270"/>
 
-## Features
 
 - Configure 3 different types of Pin Field Views to your app.
 - Allow your users to paste the characters into your Pin Field which no other library provides
