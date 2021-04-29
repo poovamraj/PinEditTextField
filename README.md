@@ -8,7 +8,7 @@ which no other library provides.
 ## Migrate to Jitpack
 Since Bintray is shutting down, the project is migrated to Jitpack. You can set it up by following this method
 
-## Setup
+**Setup**
 
 **Gradle**
 
