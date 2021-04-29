@@ -1,7 +1,29 @@
 ![PinEditTextField for Android](https://raw.githubusercontent.com/poovamraj/PinEditTextField/master/Logo/PinEditTextField%20_Logo_Horizontal.png)
 
  [ ![Download](https://api.bintray.com/packages/poovamraj/Android-Pin-Field/PinEditTextField/images/download.svg) ](https://bintray.com/poovamraj/Android-Pin-Field/PinEditTextField/_latestVersion)[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-PinEditTextField-green.svg?style=flat )]( https://android-arsenal.com/details/1/7051 )
- 
+
+## Migrate to Jitpack
+Since Bintray is shutting down, the project is migrated to Jitpack. You can set it up by following this method
+
+## Setup
+
+**Gradle**
+
+- **Project level `build.gradle`**
+```gradle
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+- **App level `build.gradle`**
+```gradle
+dependencies {
+    implementation 'com.github.poovamraj:PinEditTextField:1.2.5'
+}
+```
+
 This repository contains `PinEditTextField` that provides Pin Field widget for android with `Paste Functionality`
 which no other library provides.
 
@@ -23,25 +45,6 @@ which no other library provides.
 - Mask your passwords properly.
 - Use any type of keyboard you would like for the View.
 - Highly configurable with many attributes for your View.
-
-## Setup
-
-**Gradle**
-
-- **Project level `build.gradle`**
-```gradle
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
-```
-- **App level `build.gradle`**
-```gradle
-dependencies {
-    implementation 'com.poovam:pin-edittext-field:1.2.3'
-}
-```
 
 ### Usage
 
