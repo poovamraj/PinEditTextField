@@ -21,7 +21,7 @@ allprojects {
 - **App level `build.gradle`**
 ```gradle
 dependencies {
-    implementation 'com.github.poovamraj:PinEditTextField:1.2.5'
+    implementation 'com.github.poovamraj:PinEditTextField:1.2.6'
 }
 ```
 
